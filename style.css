@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+.headerimg {
+  padding: 0 50vh;
+}
+section {
+  width: 100%;
+  padding: 0 7%;
+  display: table;
+  margin: 0;
+  max-width: none;
+  background-color: #373B44;
+  height: 100vh;
+}
+section:nth-of-type(2n) {
+  background-color: #f0bf00;
+}
+
+
+.intro {
+  height: 98vh;
+}
+
+.content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: #C3CAD9;
+}
+
+a {
+  color: #373B44;
+}
+a:hover {
+  opacity: 0.8;
+}
+a:active {
+  top: 1px;
+}
+
