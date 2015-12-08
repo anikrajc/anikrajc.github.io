@@ -1,57 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+   <meta name="mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <!-- Chrome, Firefox OS and Opera -->
+<meta name="theme-color" content="#373B44">
+<!-- Windows Phone -->
+<meta name="msapplication-navbutton-color" content="#373B44">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-status-bar-style" content="#373B44">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.5/jquery.fullPage.min.css" />
 </head>
 
 
  <body>
-<section class="intro">
-    <div class="container">
-      <div class="row valign-wrapper ">
 
-        <div class="col s8 offset-s2 m6 offset-m3  l4 offset-l4 ">
-          <img class="responsive-img circle"   src="img/dp.jpg">
-        </div>
-
-
+<div id="startup">
+    <svg class="spinner-container" width="65px" height="65px" viewBox="0 0 52 52">
+      <circle class="path" cx="26px" cy="26px" r="20px" fill="none" stroke-width="4px"></circle>
+    </svg>
+  </div>
+<div id="main">
 
 
-      </div>
- </div>
-</section>
+<div id="fullpage" style="position:relative;">
 
-<section >
-  <div class="content" >
-    <h1>Resize your browser and see how they adapt.</h1>
- </div>
-</section>
+  <div class="section sectionx" id="section0" style="position:relative; z-index:1;">
+         <div class="container" >
+            <div class="row ">
 
-<section>
-  <div class="content">
-    <h1>It's amazing and fast.</h1>
- </div>
-</section>
-
-<section>
-  <div class="content">
-    <h1>See the <a href="http://caniuse.com/#feat=viewport-units">browser support.</a></h1>
- </div>
-</section>
+              <div class="col s8 offset-s2 m6 offset-m3  l4 offset-l4 ">
+                <img id="dp" class="responsive-img circle animate"   src="img/dp.jpg">
+            </div>
+          </div>
+            <div class="row " >
 
 
+                <h1 class="thin valign center-align" style="white-space: nowrap;">Anik Raj C</h1>
+                <h5 class="thin  valign center-align" style="white-space: nowrap; color:#eee; opacity:0.5; margin-top:-10px;">Mobile/Web Developer</h5>
+              </div>
 
-<footer class="fixed-action-btn" style="bottom: 15px; right: 20px;">
-    <a class="btn-floating btn-large green">
-      <i class="large mdi-action-help"></i>
+              <div class="row ">
+                <div style="text-align:center; ">
+                    <a class="btn-floating btn-large transparent" style="margin:5px;" href="https://www.facebook.com/anikrajc" target="_blank"><img class="responsive-img circle" src="img/facebook.png"></a>
+
+
+                    <a class="btn-floating btn-large transparent" style="margin:5px;" href="https://twitter.com/anikrajc" target="_blank"><img class="responsive-img circle" src="img/twitter.png"></a>
+
+                    <a class="btn-floating btn-large transparent" style="margin:5px;" href="https://plus.google.com/u/0/106040129330489580197" target="_blank"><img class="responsive-img circle" src="img/gplus2.png"></a>
+                    <a class="btn-floating btn-large transparent" style="margin:5px;" href="https://github.com/anikraj1994" target="_blank"><img class="responsive-img circle" src="img/github.png"></a>
+                    <a class="btn-floating btn-large transparent" style="margin:5px;" href="http://in.linkedin.com/in/anikrajc" target="_blank"><img class="responsive-img circle" src="img/linkedin.png"></a>
+                    <a class="btn-floating btn-large transparent" style="margin:5px;" href="https://profiles.udacity.com/u/anikraj" target="_blank"><img class="responsive-img circle" src="img/udacity.png"></a>
+                    
+              </div>
+            </div>
+          </div>
+
+
+          <div id="g1" style=" position: absolute;
+              top: 200px; 
+              left: 0; z-index: -1; opacity:0.1;">
+             <img src="img/gear-md.png">
+          </div>
+          <div id="g2" style=" position: absolute;
+              top: 210px; 
+              left: 130px; z-index: -1; opacity:0.1;">
+             <img src="img/gear-md2.png">
+          </div>
+          <div id="g3" style=" position: absolute;
+              top: 250px; 
+              left: 0; z-index: -1; opacity:0.1;">
+             <img src="img/gear-md3.png">
+          </div>
+  </div>
+
+  <div class="section sectionx" id="section1">
+     
+  </div>
+
+  <div class="section sectionx" id="section2">
+   
+  </div>
+
+</div>
+
+
+
+<footer class="fixed-action-btn" style="bottom: 20px; right: 20px;">
+    <a class="fab fabparent btn-floating btn-large waves-effect waves-light red">
+      <i class="material-icons">description</i>
     </a>
+     <ul></li>
+             <li><span class="mobile-fab-tip">One page Résumé</span><a class="fab btn-floating brown lighten-1 tooltipped" onCLick="resume()" data-position="left" data-delay="10" data-tooltip="One page Résumé"> <i class="material-icons">description</i></a>
+         </li>
+         <li><span class="mobile-fab-tip">Detailed CV</span><a class="fab btn-floating teal tooltipped" onClick="cv()" data-position="left" data-delay="10" data-tooltip="Detailed CV"><i class="material-icons">library_books</i></a></li>
+      
+
+       </ul>
   </footer>  
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.5/vendors/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.5/jquery.fullPage.min.js"></script>
 
 
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+ <script src="js/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+function webteam(){
+  swal({   title: "Download",   text: '<div class="row"> <div class="col s6 m6 l6"><img src="img/ic_description_black_48dp_2x.png" alt="" class="circle responsive-img"><br><br>One page Résumé</div><div class="col s6 m6 l6"><img src="img/ic_library_books_black_48dp_2x.png" alt="" class="circle responsive-img"><br><br>Detailed CV</div>',   html: true,allowOutsideClick:true, showConfirmButton: false });
+}
+function cv(){
+
+}
+
+function resume(){
+  
+}
+
+</script>
+
+
+
+
+  <script src="js/jquery.vibrate.min.js"></script>
+  <script src="js/gyro.min.js"></script>
+ <script src="js/velocity.min.js"></script>
+
+  <script type="text/javascript">
+    $(".fab").vibrate("small");
+    gyro.frequency = 200;
+    gyro.startTracking(function(o) {
+        // o.x, o.y, o.z for accelerometer
+        // o.alpha, o.beta, o.gamma for gyro
+        var anglex = o.x;
+        var angley = o.y;
+        deviceOrientationHandler(o.x,o.y);
+        //$('#dp').css('transform','rotate(' + angle + 'deg)');
+        //$('#dp').velocity({
+        //rotateZ: angle+"deg"
+        //});
+
+
+
+
+    });
+
+ function deviceOrientationHandler(tiltLR, tiltFB) {
+      // Apply the transform to the image
+      var logo = document.getElementById("dp");
+      logo.style.webkitTransform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+      logo.style.MozTransform = "rotate("+ tiltLR +"deg)";
+      logo.style.transform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+    }
+    
+
+
+
+function callback(){
+    return function(){$('#main').fadeIn();
+      $('#startup').remove();
+    }
+}
+$(document).ready(function(){
+$('#fullpage').fullpage({
+        menu: '#menu',
+        responsiveWidth: 1100,
+        autoScrolling: false
+      });
+
+
+setTimeout(callback(), 1000);
+});
+
+$(window).bind('scroll', function (e) {
+    gearSpin();
+});
+
+function gearSpin() {
+    var pos = $(window).scrollTop();
+    $('#g1').css('transform', 'rotate(' + (pos / 2) + 'deg)');
+    $('#g2').css('transform', 'rotate(-' + ((pos / 2) + 18) + 'deg)');
+    $('#g3').css('transform', 'rotate(' + (pos / 2) + 'deg)');
+}
+  </script>
 </body>
 </html>

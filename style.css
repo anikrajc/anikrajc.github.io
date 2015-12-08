@@ -20,10 +20,12 @@ section {
 section:nth-of-type(2n) {
   background-color: #f0bf00;
 }
-
+.animate {
+  transition: 300ms linear all;
+}
 
 .intro {
-  height: 98vh;
+  height: 70vh;
 }
 
 .content {
@@ -41,11 +43,5 @@ p {
 
 a {
   color: #373B44;
-}
-a:hover {
-  opacity: 0.8;
-}
-a:active {
-  top: 1px;
 }
 
