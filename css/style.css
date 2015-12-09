@@ -1,3 +1,26 @@
+::selection {
+  background: #f0bf00; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #f0bf00; /* Gecko Browsers */
+}
+h5.high::selection {
+  background: #e67e22; /* WebKit/Blink Browsers */
+}
+h5.high::-moz-selection {
+  background: #e67e22; /* Gecko Browsers */
+}
+.box{
+    padding: 30px;
+    margin: 30px;
+    background: red;
+}
+.redselect{
+
+}
+.redselect:hover {
+  text-decoration: underline;
+}
 
 #dp {
   padding-top: 20px;
