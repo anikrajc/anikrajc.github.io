@@ -24,7 +24,7 @@
         <div class="head">
             <img class="dp" src="img/dp.jpg" alt="display picture" />
             <div class="title">Anik Raj C</div>
-            <div class="sub-title">Android/Web developer</div>
+            <div class="sub-title">mail@anikrajc.com</div>
             <div class="fav-list">
                 <a target="_blank" rel="noopener" href="https://www.facebook.com/anikrajc"><img class="fav" src="img/facebook.png" alt="facebook" /></a>
                 <a target="_blank" rel="noopener" href="https://twitter.com/anikrajc"><img class="fav" src="img/twitter.png" alt="twitter" /></a>
@@ -53,15 +53,22 @@
 
 
     <!--templates-->
-    <div id="project-clone" class="project-card" v-for="project in projects" hidden>
-        <img id="project-clone-img" alt="project image" src="img/test.jpg" class="project-card-img" />
+    <div id="project-clone" class="project-card" hidden>
+        <img id="project-clone-img" alt="project image" src="" class="project-card-img" />
         <div class="project-card-body">
             <div id="project-clone-title" class="project-card-body-title">title</div>
             <div id="project-clone-description" class="project-card-body-description">desc</div>
+            <a id="project-clone-link" href="" target="_blank" hidden>
+                <div id="project-clone-link" class="rounded-text-black unselectable">link</div>
+            </a>
+            <a id="project-clone-link-live" href="" target="_blank" hidden>
+                <div id="project-clone-link" class="rounded-text-black unselectable">Project</div>
+            </a>
         </div>
     </div>
 </body>
 
+<script src="js/projects.js" defer></script>
 <script src="js/main.js" defer></script>
 
 </html>

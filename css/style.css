@@ -7,6 +7,15 @@ body {
     margin: 0;
 }
 
+
+/*
+body {
+    background-color: #373B44;
+    background-image: radial-gradient(white 1px, transparent .1%);
+    background-size: 100px 100px;
+    background-attachment: fixed;
+}*/
+
 .container {
     max-width: 480px;
     margin: 0 auto;
@@ -29,6 +38,24 @@ body {
     font-weight: 100;
     margin: 5px;
     cursor: pointer;
+}
+
+.rounded-text-black {
+    float: right;
+    border-radius: 5px;
+    border: 1px solid #000;
+    color: black;
+    opacity: .6;
+    padding: 5px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.rounded-text-black:hover {
+    opacity: 1;
 }
 
 .rounded-text-selected {
@@ -134,6 +161,7 @@ body {
 }
 
 .project-card {
+    width: 100%;
     margin: 5px;
     background: white;
     max-width: 200px;
@@ -159,6 +187,7 @@ body {
     text-justify: inter-word;
     font-weight: 400;
     opacity: 0.6;
+    margin-top: 5px;
 }
 
 .unselectable {

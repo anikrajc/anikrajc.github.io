@@ -1,4 +1,4 @@
-var CACHE_NAME = 'cache-v1';
+var CACHE_NAME = 'cache-v3';
 var urlsToCache = [
     '/',
     '/css/style.css',
@@ -7,6 +7,7 @@ var urlsToCache = [
 
 self.addEventListener('install', function(event) {
     // Perform install steps
+    event.waitUntil(self.skipWaiting());
     event.waitUntil(
         caches.open(CACHE_NAME)
         .then(function(cache) {
@@ -17,7 +18,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-
+    event.waitUntil(self.clients.claim());
     var cacheWhitelist = [];
 
     event.waitUntil(
