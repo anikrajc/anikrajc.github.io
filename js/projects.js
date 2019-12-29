@@ -1,4 +1,5 @@
 var android = [
+    { "title": "Remote Control for PopcornTime", "description": "Pick shows from the remote browser and play it on the big screen.", img: "img/project/remote.jpg", livelink: "https://play.google.com/store/apps/details?id=com.anikrajc.remote&hl=en", livelinkname: "play store" },
     { "title": "Nanodegree Capstone Project", "description": "Android Nanodegree capstone project - Campus Secrets!", img: "img/project/capstone-min.jpeg", link: "https://github.com/anikraj1994/Capstone-Project", linkname: "github" },
     { "title": "Nanodegree Project - Go Ubiquitous!", "description": "An android wear watch face which displays the time and weather.", img: "img/project/p6-min.jpg", link: "https://github.com/anikraj1994/AND-Project-6", linkname: "github" },
     { "title": "IOU", "description": "Android App to keep track of micro-lends and repay smartly", img: "img/project/iou-min.jpg", link: "https://github.com/anikraj1994/IOU", linkname: "github", livelink: "https://play.google.com/store/apps/details?id=me.anikraj.iou&hl=en", livelinkname: "play store" },
@@ -11,6 +12,7 @@ var android = [
     { "title": "Nanodegree Project - Stock Hawk!", "description": "Android app to keep track and graph stocks with widgets.", img: "img/project/p3-min.jpg", link: "https://github.com/anikraj1994/AND_Project_3", linkname: "github" }
 ];
 var web = [
+    { "title": "Friday Kottaka", "description": "Movie reviews, trailers and more!", img: "img/project/fk.jpg", livelink: "https://fridaykottaka.com", livelinkname: "link" },
     { "title": "Bit Maker", "description": "A modern webapp to create cheat sheets ;)", img: "img/project/bitmaker.png", link: "https://github.com/anikraj1994/BitMaker", linkname: "github", livelink: "https://bitmaker.tk/", livelinkname: "link" },
     { "title": "Hack4People", "description": "Website for Hack4People 2016 national hackathon.", img: "img/project/h4pp-min.jpg", link: "https://github.com/hack4people/hack4people.github.io", linkname: "github", livelink: "https://hack4people.com/", livelinkname: "link" },
     { "title": "Hack4People Filter", "description": "A profile picture filter using fabricjs.", img: "img/project/h4p-min.jpg", link: "https://github.com/hack4people/profile-filter", linkname: "github", livelink: "https://hack4people.com/profile-filter", livelinkname: "link" },
