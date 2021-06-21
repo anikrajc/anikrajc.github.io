@@ -1,13 +1,18 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home3</router-link> |
+      <router-link to="/">Home4</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
   </div>
 </template>
-
+<script>
+import mix_update from "@/mixins/update.js";
+export default {
+  mixins: [mix_update],
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
