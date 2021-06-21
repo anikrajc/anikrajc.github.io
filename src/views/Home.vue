@@ -22,7 +22,7 @@
         />
       </div>
       <div class="mt-4">
-        Engineering @ <span class="warning--text">Mobishaala</span>
+        Engineering Lead @ <span class="warning--text">Mobishaala</span>
         <br />Android Nanodegree graduate @
         <span class="warning--text">Udacity</span>
       </div>
