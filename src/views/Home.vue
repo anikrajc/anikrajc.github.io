@@ -22,9 +22,24 @@
         />
       </div>
       <div class="mt-4">
-        Engineering Lead @ <span class="warning--text">Mobishaala</span>
+        Software Engineering Lead @
+        <a
+          class="warning--text text-decoration-none"
+          target="_blank"
+          referrerpolicy="no-referrer"
+          href="https://mobishaala.com"
+        >
+          Mobishaala
+        </a>
         <br />Android Nanodegree graduate @
-        <span class="warning--text">Udacity</span>
+        <a
+          class="warning--text text-decoration-none"
+          target="_blank"
+          referrerpolicy="no-referrer"
+          href="https://udacity.com"
+        >
+          Udacity
+        </a>
       </div>
       <meeting-button> Let's Talk </meeting-button>
     </center-content>
