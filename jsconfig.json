@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["webpack-env", "mocha", "vuetify", "chai"]
+  },
+  "include": [
+    "./**/*.js",
+    "./**/*.vue",
+    "node_modules/cypress/types/index.d.ts",
+    "node_modules/cypress/types/blob-util.d.ts",
+    "node_modules/cypress/types/minimatch.d.ts",
+    "node_modules/cypress/types/bluebird.d.ts",
+    "cypress/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
