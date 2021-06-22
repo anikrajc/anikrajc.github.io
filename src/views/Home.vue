@@ -5,9 +5,7 @@
         <v-avatar size="128">
           <img src="@/assets/dp.jpg" alt="Anik C" />
         </v-avatar>
-        <div class="text-h4 font-weight-medium mt-4" @click="toggleDarkMode">
-          Anik Raj C
-        </div>
+        <div class="text-h4 font-weight-medium mt-4">Anik Raj C</div>
         <div class="mt-4">
           <avatar-link
             icon="fab fa-twitter"
