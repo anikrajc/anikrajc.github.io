@@ -1,11 +1,11 @@
 <template>
   <v-btn
     color="primary"
-    class="mt-5 primary-text-bg"
-    text
+    class="mt-6"
     href="https://calendly.com/anikrajc/15min"
     target="_blank"
     x-large
+    outlined
   >
     <slot></slot>
   </v-btn>
