@@ -1,11 +1,6 @@
 <template>
   <v-col cols="12" sm="6">
-    <v-card
-      class="pa-2 rounded-lg ma-2"
-      style="background: rgba(0, 0, 0, 0.2)"
-      elevation="2"
-      outlined
-    >
+    <base-card>
       <v-icon
         style="float: right"
         size="30"
@@ -41,11 +36,13 @@
           Open <v-icon size="15" right>fas fa-external-link-alt</v-icon>
         </v-btn>
       </v-card-actions>
-    </v-card>
+    </base-card>
   </v-col>
 </template>
 <script>
+import BaseCard from "@/components/base/BaseCard.vue";
 export default {
+  components: { BaseCard },
   props: ["platform", "title", "description", "meta", "link", "logo"],
 };
 </script>

@@ -13,7 +13,7 @@
           />
           <avatar-link
             icon="fab fa-github-alt"
-            href="https://github.com/anikraj1994"
+            href="https://github.com/anikrajc"
           />
           <avatar-link
             icon="fab fa-linkedin-in"
@@ -21,16 +21,16 @@
           />
         </div>
         <div class="mt-4">
-          Software Engineering Lead @
+          Engineering @
           <a
             class="warning--text text-decoration-none"
             target="_blank"
             referrerpolicy="no-referrer"
-            href="https://mobishaala.com"
+            href="https://www.swiggy.com/"
           >
-            Mobishaala
+            Swiggy
           </a>
-          <br />Android Nanodegree graduate @
+          <br />Android Nanodegree @
           <a
             class="warning--text text-decoration-none"
             target="_blank"
@@ -40,10 +40,19 @@
             Udacity
           </a>
         </div>
-        <meeting-button> Let's Talk </meeting-button>
+      </div>
+      <div class="mt-15" v-if="recentPosts && recentPosts.length != 0">
+        <div class="text-h6 text-align-left ml-2">Recent posts</div>
+        <app-grid>
+          <recent-post
+            v-for="(item, index) in recentPosts"
+            :key="index"
+            :item="item"
+          />
+        </app-grid>
       </div>
       <div class="mt-15">
-        <div class="text-h6 text-align-left ml-2">Apps</div>
+        <div class="text-h6 text-align-left ml-2">Weekend projects</div>
         <app-grid>
           <app-tile
             platform="android"
@@ -69,12 +78,27 @@
 <script>
 import CenterContent from "@/components/CenterContent.vue";
 import AvatarLink from "@/components/AvatarLink.vue";
-import MeetingButton from "@/components/MeetingButton.vue";
 import AppGrid from "@/components/AppGrid.vue";
 import AppTile from "@/components/AppTile.vue";
+import RecentPost from "@/components/RecentPost.vue";
+
 export default {
-  components: { MeetingButton, AvatarLink, CenterContent, AppTile, AppGrid },
+  components: { AvatarLink, CenterContent, AppTile, AppGrid, RecentPost },
+  data: () => ({
+    publicPath: process.env.BASE_URL,
+    recentPosts: [],
+  }),
+  mounted() {
+    this.loadRssFiles();
+  },
   methods: {
+    loadRssFiles() {
+      fetch(this.publicPath + "feeds/medium.json")
+        .then((response) => response.json())
+        .then((json) => {
+          this.recentPosts = json.items;
+        });
+    },
     toggleDarkMode() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
       const body = document.getElementsByTagName("body")[0];
