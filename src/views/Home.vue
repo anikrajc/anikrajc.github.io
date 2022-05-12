@@ -6,21 +6,8 @@
           <img src="@/assets/dp.jpg" alt="Anik C" />
         </v-avatar>
         <div class="text-h4 font-weight-medium mt-4">Anik Raj C</div>
-        <div class="mt-4">
-          <avatar-link
-            icon="fab fa-twitter"
-            href="https://twitter.com/anikrajc"
-          />
-          <avatar-link
-            icon="fab fa-github-alt"
-            href="https://github.com/anikrajc"
-          />
-          <avatar-link
-            icon="fab fa-linkedin-in"
-            href="http://in.linkedin.com/in/anikrajc"
-          />
-        </div>
-        <div class="mt-4">
+
+        <div class="mt-2">
           Engineering @
           <a
             class="warning--text text-decoration-none"
@@ -39,6 +26,21 @@
           >
             Udacity
           </a>
+        </div>
+
+        <div class="mt-8">
+          <avatar-link
+            icon="fab fa-twitter"
+            href="https://twitter.com/anikrajc"
+          />
+          <avatar-link
+            icon="fab fa-github-alt"
+            href="https://github.com/anikrajc"
+          />
+          <avatar-link
+            icon="fab fa-linkedin-in"
+            href="http://in.linkedin.com/in/anikrajc"
+          />
         </div>
       </div>
       <div class="mt-15" v-if="recentPosts && recentPosts.length != 0">
