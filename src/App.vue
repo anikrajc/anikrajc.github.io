@@ -61,4 +61,8 @@ body.dark::-webkit-scrollbar-thumb {
 body.dark::-webkit-scrollbar-thumb:hover {
   background: var(--v-surface-lighten2);
 }
+
+html {
+  background: var(--v-surface-base);
+}
 </style>
