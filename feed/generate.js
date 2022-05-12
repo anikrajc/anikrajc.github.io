@@ -4,7 +4,7 @@ const fs = require("fs");
 let parser = new Parser();
 
 (async () => {
-  let feed = await parser.parseURL("https://medium.com/feed/@radhika.s_76503");
+  let feed = await parser.parseURL("https://medium.com/feed/@anikrajc");
   writeFile("public/feeds/medium.json", feed);
 })();
 
