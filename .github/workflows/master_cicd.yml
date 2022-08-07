@@ -1,4 +1,4 @@
-name: CI
+name: Master CICD
 
 # Allow one concurrent deployment
 concurrency:

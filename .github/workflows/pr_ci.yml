@@ -1,4 +1,4 @@
-name: CI
+name: PR CI
 
 # Allow one concurrent build per head ref
 concurrency:
