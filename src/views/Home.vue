@@ -33,8 +33,8 @@
             icon="fab fa-twitter"
             href="https://twitter.com/anikrajc"
           />
-          <avatar-link
-            icon="fab fa-github-alt"
+          <AvatarLinkSVG
+            :icon="require('@/assets/ic_gh.svg')"
             href="https://github.com/anikrajc"
           />
           <avatar-link
@@ -80,12 +80,20 @@
 <script>
 import CenterContent from "@/components/CenterContent.vue";
 import AvatarLink from "@/components/AvatarLink.vue";
+import AvatarLinkSVG from "@/components/AvatarLinkSVG.vue";
 import AppGrid from "@/components/AppGrid.vue";
 import AppTile from "@/components/AppTile.vue";
 import RecentPost from "@/components/RecentPost.vue";
 
 export default {
-  components: { AvatarLink, CenterContent, AppTile, AppGrid, RecentPost },
+  components: {
+    AvatarLink,
+    AvatarLinkSVG,
+    CenterContent,
+    AppTile,
+    AppGrid,
+    RecentPost,
+  },
   data: () => ({
     publicPath: process.env.BASE_URL,
     recentPosts: [],
