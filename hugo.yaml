@@ -111,5 +111,4 @@ giscus:
 outputs:
   home:
     - HTML
-    - RSS
     - JSON # is necessary
