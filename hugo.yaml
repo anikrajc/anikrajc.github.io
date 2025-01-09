@@ -1,5 +1,5 @@
 baseURL: "https://anik.sh"
-title: Anik C
+title: Anik Raj C
 pagination:
   pagerSize: 5
 theme: PaperMod
@@ -15,14 +15,14 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: Anik C
+  title: Anik
   description: "ExampleSite description"
   keywords: [Blog, Portfolio]
   # author: ["Me", "You"] # multiple authors
   images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 2, 2006"
-  defaultTheme: dark # dark, light
-  disableThemeToggle: true
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
 
   ShowReadingTime: true
   ShowShareButtons: false
@@ -39,6 +39,7 @@ params:
   hideSummary: false
   showtoc: false
   tocopen: false
+  hideFooter: true
 
   assets:
     # disableHLJS: true # to disable highlight.js
@@ -50,49 +51,37 @@ params:
     safari_pinned_tab: "<link / abs url>"
 
   label:
-    text: "Anik C"
-    icon: /apple-touch-icon.png
-    iconHeight: 35
+    text: "Anik"
 
   profileMode:
     enabled: true
     title: Anik Raj C
-    subtitle: "Hello \U0001F44B "
-    imageUrl: "<img location>"
+    subtitle: "Engineering @ [Swiggy](https://www.swiggy.com/)"
+    imageUrl: "/dp.jpg"
     imageWidth: 120
     imageHeight: 120
-    imageTitle: my image
     buttons:
       - name: Posts
         url: posts
       - name: Tags
         url: tags
 
-  # home-info mode
-  homeInfoParams:
-    Title: "Hi there \U0001F44B"
-    Content: Welcome to my blog
-
   socialIcons:
-    - name: x
-      url: "https://x.com/"
-    - name: stackoverflow
-      url: "https://stackoverflow.com"
     - name: github
-      url: "https://github.com/"
+      url: "https://github.com/anikrajc"
+    - name: x
+      url: "https://x.com/anikrajc"
+    - name: linkedin
+      url: "http://in.linkedin.com/in/anikrajc"
 
   analytics:
     google:
       SiteVerificationTag: "XYZabc"
-    bing:
-      SiteVerificationTag: "XYZabc"
-    yandex:
-      SiteVerificationTag: "XYZabc"
 
   cover:
-    hidden: true # hide everywhere but not in structured data
+    hidden: false # hide everywhere but not in structured data
     hiddenInList: true # hide on list pages and home
-    hiddenInSingle: true # hide on single page
+    hiddenInSingle: false # hide on single page
 
 menu:
   main:
@@ -117,3 +106,10 @@ giscus:
     categoryID: "DIC_kwDOAo5DU84Cl3E4"
     mapping: "pathname"
     inputPosition: "top"
+
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # is necessary

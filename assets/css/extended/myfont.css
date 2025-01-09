@@ -1,5 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+body {
+  font-family: "Roboto";
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "GRAD" 0;
+}
 
-bosdaady {
-  font-family: "IBM Plex Mono";
+.giscus-frame {
+  background: unset;
+}
+
+code {
+  font-family: "JetBrains Mono";
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.js-code-output-executor {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.executable-fragment {
+  background-color: unset;
+  background: unset;
+  border-radius: 10px;
+  border: 0px solid #f00;
+  /* Optional: Add a border */
+}
+
+.executable-fragment .run-button {
+  width: 12px;
+  height: 15px;
+  top: 8px;
+  right: 8px;
+  /* background: red; */
+}
+
+.CodeMirror {
+  border-radius: 8px;
+  /* Adjust the value as needed */
+  padding-bottom: 20px;
+  overflow: hidden;
+  /* Ensures content doesn't overflow the rounded edges */
 }

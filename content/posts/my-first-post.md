@@ -3,14 +3,14 @@ draft: false
 title: "Title"
 tags: ["first"]
 description: "Desc Text."
-date: 2020-09-15T11:30:03+00:00
+date: 2025-01-08T11:30:03+00:00
 # weight: 1
 cover:
-    image: "<image path/url>" # image path/url
-    alt: "<alt text>" # alt text
-    caption: "<text>" # display caption under cover
+    image: "/dp.jpg" # image path/url
+    alt: "Description" # alt text
+    caption: "Caption" # display caption under cover
     relative: false # when using page bundles set this to true
-    hidden: true # only hide on current single page
+    hidden: false # only hide on current single page
 ---
 
 You want to be using the latest JDK for development. 
@@ -50,28 +50,84 @@ Finally, in your `renovate.json5`[^2], add a custom manager to update this file[
 
 [^3]: You can adapt the file-matching regex and string-matching regex to target the GitHub Action `.yaml`s directly if you want. I choose to use the `.java-version` file so that I can install multiple older JDKs with a second `setup-java` (which won't be updated) for [testing with multiple JDKs](/build-on-latest-java-test-through-lowest-java/).
 
-```json5
-ignorePresets: [
-  // Ensure we get the latest version and are not pinned to old versions.
-  'workarounds:javaLTSVersions',
-],
-customManagers: [
-  // Update .java-version file with the latest JDK version.
-  {
-    customType: 'regex',
-    fileMatch: [
-      '\\.java-version$',
-    ],
-    matchStrings: [
-      '(?<currentValue>.*)\\n',
-    ],
-    datasourceTemplate: 'java-version',
-    depNameTemplate: 'java',
-    // Only write the major version.
-    extractVersionTemplate: '^(?<version>\\d+)',
-  },
-],
+
+
+
+{{< kotlin >}}
+
+data class Contact(val id: Int, var email: String) 
+   
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)                   
+}
+{{< /kotlin >}}
+
+
+
+{{< kotlin >}}
+data class Contact(val id: Int, var email: String) 
+   
+//sampleStart
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)     
+//sampleEnd              
+}
+{{< /kotlin >}}
+
+
+{{< kotlin >}}
+
+data class Contact(val id: Int, var email: String) 
+   
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)                   
+}
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)                   
+}
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)                   
+}
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)                   
+}
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)                   
+}
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)                   
+}
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)                   
+}
+fun main() {
+    val contact = Contact(1, "mary@gmail.com")
+    println(contact)                   
+}
+{{< /kotlin >}}
+
+
+```kotlin
+/**
+ * You can edit, run, and share this code. 
+ * play.kotlinlang.org 
+ */
+
+fun main() {
+    println("Hello, world!!!")
+}
 ```
+
+
 
 Commit, push, and wait for Renovate to send you a PR[^4].
 Now your CI build automatically tracks the latest JDK.

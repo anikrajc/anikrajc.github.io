@@ -1,0 +1,15 @@
+<!-- kotlin -->
+<code class="language-kotlin kotlin-code"
+    {{- if .Get "foldedButton" }} folded-button="{{ .Get "foldedButton" }}" {{ end -}}
+    {{- if .Get "highlightOnly" }} data-highlight-only {{ end -}}
+    {{- if .Get "jsLibs" }} data-js-libs="{{ .Get "jsLibs" }}" {{ end -}}
+    {{- if .Get "targetPlatform" }} data-target-platform="{{ .Get "targetPlatform" }}" {{ end -}}
+    lines="true"
+    data-autocomplete="true"
+    match-brackets="true"
+    theme="darcula"
+>
+{{htmlUnescape .Inner }}
+</code>
+
+<!-- /kotlin -->

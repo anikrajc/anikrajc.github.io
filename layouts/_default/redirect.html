@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }}</title>
+    <meta http-equiv="refresh" content="0; url={{ .Params.redirect }}">
+    <link rel="canonical" href="{{ .Params.redirect }}">
+</head>
+<body>
+    <p>If you are not redirected automatically, <a href="{{ .Params.redirect }}">click here</a>.</p>
+</body>
+</html>
