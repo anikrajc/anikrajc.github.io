@@ -6,26 +6,26 @@ theme: PaperMod
 
 enableRobotsTXT: true
 buildDrafts: false
-buildFuture: false
-buildExpired: false
+buildFuture: true
+buildExpired: true
 
 minify:
   disableXML: true
   minifyOutput: true
 
 params:
-  env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: Anik
-  description: "ExampleSite description"
-  keywords: [Blog, Portfolio]
-  # author: ["Me", "You"] # multiple authors
+  env: production
+  title: Anik Raj C
+  description: "Android developer at Swiggy"
+  keywords: [Blog, Android, Kotlin, ]
   images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 2, 2006"
   defaultTheme: auto # dark, light
   disableThemeToggle: false
+  googleAnalytics: "G-9FX0CB6DDP"
 
-  ShowReadingTime: true
-  ShowShareButtons: false
+  ShowReadingTime: false
+  ShowShareButtons: true
   ShowPostNavLinks: false
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
@@ -51,20 +51,22 @@ params:
     safari_pinned_tab: "<link / abs url>"
 
   label:
-    text: "Anik"
+    text: "Anik Raj C"
+
+  homeInfoParams:
+    Title: Hi there wave
+    Content: Can be Info, links, about...
 
   profileMode:
-    enabled: true
+    enabled: false
     title: Anik Raj C
     subtitle: "Engineering @ [Swiggy](https://www.swiggy.com/)"
-    imageUrl: "/dp.jpg"
+    imageUrl: "/dp.webp"
     imageWidth: 120
     imageHeight: 120
     buttons:
-      - name: Posts
-        url: posts
-      - name: Tags
-        url: tags
+      - name: Blog
+        url: blog
 
   socialIcons:
     - name: github
@@ -76,18 +78,18 @@ params:
 
   analytics:
     google:
-      SiteVerificationTag: "XYZabc"
+      SiteVerificationTag: "G-9FX0CB6DDP"
 
   cover:
     hidden: false # hide everywhere but not in structured data
-    hiddenInList: true # hide on list pages and home
+    hiddenInList: false # hide on list pages and home
     hiddenInSingle: false # hide on single page
 
 menu:
   main:
-    - identifier: tags
-      name: tags
-      url: /tags/
+    - identifier: blog
+      name: Blog
+      url: /blog/
       weight: 20
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
