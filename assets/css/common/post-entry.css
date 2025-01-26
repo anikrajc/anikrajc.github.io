@@ -35,11 +35,14 @@
 .post-entry {
     position: relative;
     margin-bottom: var(--gap);
-    padding: var(--gap);
     background: var(--entry);
     border-radius: var(--radius);
     transition: transform 0.1s;
     border: 1px solid var(--border);
+}
+
+.post-entry .post-contents { 
+    padding: var(--gap);
 }
 
 .post-entry:active {
@@ -90,8 +93,12 @@
 
 .entry-cover {
     font-size: 14px;
-    margin-bottom: var(--gap);
     text-align: center;
+}
+
+.post-single .entry-cover {
+    margin-bottom: var(--gap);
+
 }
 
 .entry-cover img {

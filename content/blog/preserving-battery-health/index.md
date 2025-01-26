@@ -7,9 +7,6 @@ tags: ["android", "device farm", "testing"]
 cover:
     image: "cover.png" # image path/url
     alt: "Description" # alt text
-    caption: "Caption" # display caption under cover
-    relative: true # when using page bundles set this to true
-    hidden: false # only hide on current single page
 ---
 
 You want to be using the latest JDK for development. 

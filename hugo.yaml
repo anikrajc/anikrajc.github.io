@@ -67,8 +67,6 @@ params:
     buttons:
       - name: Blog
         url: blog
-      - name: Tags
-        url: tags
 
   socialIcons:
     - name: github
@@ -84,18 +82,14 @@ params:
 
   cover:
     hidden: false # hide everywhere but not in structured data
-    hiddenInList: true # hide on list pages and home
+    hiddenInList: false # hide on list pages and home
     hiddenInSingle: false # hide on single page
 
 menu:
   main:
     - identifier: blog
-      name: blog
+      name: Blog
       url: /blog/
-      weight: 20
-    - identifier: tags
-      name: tags
-      url: /tags/
       weight: 20
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
