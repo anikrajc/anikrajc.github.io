@@ -2,8 +2,8 @@
 
         <script>
           function getGiscusTheme() {
-              const preferredTheme = localStorage.getItem("pref-theme");
-              const giscusTheme = preferredTheme == null || preferredTheme == "light" ? "light" : "dark";
+              const preferredTheme = localStorage.getItem("pref-theme") || "light";
+              const giscusTheme = preferredTheme == "light" ? "light" : "dark";
               return giscusTheme;
           }
         

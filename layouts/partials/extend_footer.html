@@ -1,0 +1,41 @@
+<link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+<script src="https://unpkg.com/kotlin-playground@1" data-selector=".kotlin-code"></script>
+
+<script type="module">
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+    import { getPerformance } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-performance.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyB3uEeQy4i1CYgYjo6qauelHbdYjuCFIps",
+        authDomain: "anik-sh.firebaseapp.com",
+        projectId: "anik-sh",
+        storageBucket: "anik-sh.firebasestorage.app",
+        messagingSenderId: "893212092529",
+        appId: "1:893212092529:web:2fbbfb5a9b4723af4b93d0",
+        measurementId: "G-9FX0CB6DDP"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const perf = getPerformance(app);
+
+
+
+    // Keep this at the end to measure performance.
+    // import { onCLS, onINP, onLCP } from 'https://unpkg.com/web-vitals@4?module';
+
+    // onCLS(console.log);
+    // onINP(console.log);
+    // onLCP(console.log);
+</script>
