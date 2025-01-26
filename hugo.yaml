@@ -61,7 +61,7 @@ params:
     enabled: false
     title: Anik Raj C
     subtitle: "Engineering @ [Swiggy](https://www.swiggy.com/)"
-    imageUrl: "/dp.jpg"
+    imageUrl: "/dp.webp"
     imageWidth: 120
     imageHeight: 120
     buttons:

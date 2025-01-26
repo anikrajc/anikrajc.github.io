@@ -35,6 +35,9 @@
 .post-content {
     color: var(--content);
 }
+.post-content p {
+    text-align: justify;
+}
 
 .post-content h3,
 .post-content h4,
