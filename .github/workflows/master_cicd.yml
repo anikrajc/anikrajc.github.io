@@ -36,7 +36,7 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v2
       with:
-        hugo-version: "latest" # Use a specific version if needed
+        hugo-version: "0.140.2" # Use a specific version if needed
         extended: true
 
     # Step 3: Install dependencies (if using npm or other tools)
