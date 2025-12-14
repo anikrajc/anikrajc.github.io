@@ -16,11 +16,11 @@ minify:
 params:
   env: production
   title: Anik Raj C
-  description: "Android developer at Swiggy"
+  description: "Engineering @ Swiggy"
   keywords: [Blog, Android, Kotlin, ]
   images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 2, 2006"
-  defaultTheme: auto # dark, light
+  defaultTheme: auto
   disableThemeToggle: false
   googleAnalytics: "G-9FX0CB6DDP"
 
