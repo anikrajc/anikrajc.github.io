@@ -1,4 +1,15 @@
 body {
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Keep terminal UI and code in monospace */
+code,
+pre,
+kbd,
+.logo a,
+#menu li a,
+.term-panel,
+.term-panel * {
   font-family: "JetBrains Mono", monospace;
 }
 
