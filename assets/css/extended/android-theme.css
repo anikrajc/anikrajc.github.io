@@ -63,6 +63,12 @@ html, body {
     text-decoration: none !important;
 }
 
+.logo a::before {
+    content: "$ ";
+    color: var(--t-muted);
+    font-weight: 400;
+}
+
 #menu li a {
     color: var(--t-muted) !important;
     font-size: 0.8rem;
