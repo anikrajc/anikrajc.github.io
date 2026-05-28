@@ -53,9 +53,17 @@ html, body {
 
 /* ── Header ─────────────────────────────────────────────── */
 
+:root { --header-height: 50px; }
+
 .header {
     background: var(--t-bg) !important;
     border-bottom: 1px solid var(--t-border-dim) !important;
+}
+
+.nav {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: var(--header-height);
 }
 
 .logo a {
