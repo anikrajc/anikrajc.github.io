@@ -58,17 +58,9 @@ html, body {
     border-bottom: 1px solid var(--t-border-dim) !important;
 }
 
-@media (min-width: 769px) {
-    :root { --header-height: 44px; }
-    .nav {
-        padding-top: 0;
-        padding-bottom: 0;
-        line-height: var(--header-height);
-    }
-}
-
 .logo a {
     color: var(--t-green) !important;
+    font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     text-decoration: none !important;
