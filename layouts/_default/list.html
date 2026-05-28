@@ -1,13 +1,32 @@
 {{- define "main" }}
 
 {{- if .IsHome }}
-{{- partial "index_profile.html" . }}
-{{- else }} {{/* if not profileMode */}}
-{{- end }}{{/* end profileMode */}}
-
-{{- if .IsHome }}
-<h2 style="margin-bottom: 20px;">Recent Posts</h2>
-{{- end }}{{/* end profileMode */}}
+<div class="android-hero">
+  <div class="hero-inner">
+    <div class="hero-avatar-wrap">
+      <img src="/dp.webp" alt="{{ site.Title }}" class="hero-avatar" width="104" height="104">
+    </div>
+    <h1 class="hero-name">{{ site.Title }}</h1>
+    <p class="hero-role">
+      <span class="hero-role-label">Android</span>
+      <span class="hero-role-sep"> @ </span>
+      <a href="https://www.swiggy.com/" class="hero-company" target="_blank" rel="noopener noreferrer">Swiggy</a>
+    </p>
+    <p class="hero-bio">Building scalable Android apps that deliver food to millions. Writing about mobile engineering, testing &amp; Kotlin.</p>
+    <div class="hero-actions">
+      <a href="/blog/" class="hero-btn hero-btn-primary">Read Blog</a>
+      <a href="https://github.com/anikrajc" class="hero-btn hero-btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+    <div class="hero-socials">
+      {{- range site.Params.socialIcons }}
+      <a href="{{ .url | safeURL }}" title="{{ .name | title }}" target="_blank" rel="noopener noreferrer me" class="hero-social-link">
+        {{- partial "svg.html" . }}
+      </a>
+      {{- end }}
+    </div>
+  </div>
+</div>
+{{- end }}
 
 {{- if not .IsHome | and .Title }}
 <header class="page-header">
@@ -28,16 +47,13 @@
     {{- end }}
   </h1>
   {{- if .Description }}
-  <div class="post-description">
-    {{ .Description | markdownify }}
-  </div>
+  <div class="post-description">{{ .Description | markdownify }}</div>
   {{- end }}
 </header>
 {{- end }}
 
 {{- if .Content }}
 <div class="post-content">
-  <div>Test 1</div>
   {{- if not (.Param "disableAnchoredHeadings") }}
   {{- partial "anchored_headings.html" .Content -}}
   {{- else }}{{ .Content }}{{ end }}
@@ -45,7 +61,6 @@
 {{- end }}
 
 {{- $pages := union .RegularPages .Sections }}
-
 {{- if .IsHome }}
 {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
@@ -53,71 +68,73 @@
 
 {{- $paginator := .Paginate $pages }}
 
+{{- if and .IsHome (gt (len $paginator.Pages) 0) }}
+<div class="home-posts">
+  <h2 class="home-posts-title"><span class="accent-slash">//</span> Recent Posts</h2>
+{{- end }}
+
 {{- $term := .Data.Term }}
 {{- range $index, $page := $paginator.Pages }}
 
-{{- $class := "post-entry" }}
-
-{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
 {{- if $.IsHome }}
-{{- $class = "first-entry" }}
-{{- else if $term }}
-{{- $class = "post-entry tag-entry" }}
-{{- end }}
-
-<article class="{{ $class }}">
-  {{- if not $.IsHome }}
-  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-  {{- end }}
-  <div class="post-contents">
-    <header class="entry-header">
-
-      {{- if $.IsHome }}
-      <div class="entry-hint-parents">
-        {{- .Title }}
-        {{- if .Draft }}
+<article class="home-card">
+  <div class="home-card-inner">
+    <div class="home-card-body">
+      <h3 class="home-card-title">
+        {{- $page.Title }}
+        {{- if $page.Draft }}
         <span class="entry-hint" title="Draft">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-            <path
-              d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-          </svg>
-        </span>
-        {{- end }}
-      </div>
-      {{- else }}
-      <h3 class="entry-hint-parent">
-        {{- .Title }}
-        {{- if .Draft }}
-        <span class="entry-hint" title="Draft">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-            <path
-              d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" fill="currentColor"><path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z"/></svg>
         </span>
         {{- end }}
       </h3>
-      {{- end }}{{/* end profileMode */}}
+      {{- if not ($page.Param "hideMeta") }}
+      <div class="home-card-meta">{{- partial "post_meta.html" $page -}}</div>
+      {{- end }}
+    </div>
+    <div class="home-card-arrow">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </div>
+  </div>
+  <a class="home-card-link" aria-label="post link to {{ $page.Title | plainify }}" href="{{ $page.Permalink }}"></a>
+</article>
+{{- else }}
 
+{{- $class := "post-entry" }}
+{{- if $term }}{{- $class = "post-entry tag-entry" }}{{- end }}
 
-
-
+<article class="{{ $class }}">
+  {{- $isHidden := ($page.Param "cover.hiddenInList") | default ($page.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" $page "IsSingle" false "isHidden" $isHidden) }}
+  <div class="post-contents">
+    <header class="entry-header">
+      <h3 class="entry-hint-parent">
+        {{- $page.Title }}
+        {{- if $page.Draft }}
+        <span class="entry-hint" title="Draft">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor"><path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z"/></svg>
+        </span>
+        {{- end }}
+      </h3>
     </header>
-
-    {{- if (and (not $.IsHome) (ne (.Param "hideSummary") true)) }}
+    {{- if not ($page.Param "hideSummary") }}
     <div class="entry-content">
-      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+      <p>{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}...{{ end }}</p>
     </div>
     {{- end }}
-
-    {{- if not (.Param "hideMeta") }}
-    <footer class="entry-footer">
-      {{- partial "post_meta.html" . -}}
-    </footer>
+    {{- if not ($page.Param "hideMeta") }}
+    <footer class="entry-footer">{{- partial "post_meta.html" $page -}}</footer>
     {{- end }}
-    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-</div>
+    <a class="entry-link" aria-label="post link to {{ $page.Title | plainify }}" href="{{ $page.Permalink }}"></a>
+  </div>
 </article>
+{{- end }}
+{{- end }}
+
+{{- if and .IsHome (gt (len $paginator.Pages) 0) }}
+</div>
 {{- end }}
 
 {{- if gt $paginator.TotalPages 1 }}
@@ -142,6 +159,5 @@
   </nav>
 </footer>
 {{- end }}
-
 
 {{- end }}{{- /* end main */ -}}

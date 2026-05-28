@@ -20,7 +20,7 @@ params:
   keywords: [Blog, Android, Kotlin, ]
   images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 2, 2006"
-  defaultTheme: auto
+  defaultTheme: dark
   disableThemeToggle: false
   googleAnalytics: "G-9FX0CB6DDP"
 
