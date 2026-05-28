@@ -31,7 +31,9 @@
     --radius:        2px;
 }
 
-:root[data-theme="dark"] {
+/* PaperMod applies dark mode via body.dark — override here so all pages match */
+body.dark,
+body[data-theme="dark"] {
     --theme:         #0A0A0A;
     --entry:         #0D1710;
     --primary:       #DDEEDD;
