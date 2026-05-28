@@ -21,7 +21,7 @@ params:
   images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 2, 2006"
   defaultTheme: dark
-  disableThemeToggle: false
+  disableThemeToggle: true
   googleAnalytics: "G-9FX0CB6DDP"
 
   ShowReadingTime: false
@@ -51,7 +51,7 @@ params:
     safari_pinned_tab: "<link / abs url>"
 
   label:
-    text: "anikrajc@anik.sh"
+    text: "./anik.sh"
 
   homeInfoParams:
     Title: Hi there wave
