@@ -39,3 +39,208 @@
     // onINP(console.log);
     // onLCP(console.log);
 </script>
+
+<!-- android mascot – mobile only (max-width 768px) -->
+<style>
+@media(min-width:769px){#am-wrap{display:none!important}}
+#am-wrap{
+  position:fixed;bottom:0;left:0;right:0;height:110px;
+  pointer-events:none;z-index:9999;
+}
+#am{
+  position:absolute;bottom:2px;
+  width:50px;height:78px;
+  pointer-events:auto;cursor:pointer;
+  user-select:none;-webkit-user-select:none;
+  touch-action:manipulation;
+}
+#am svg{
+  width:100%;height:100%;overflow:visible;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.6)) drop-shadow(0 0 10px rgba(61,220,132,.3));
+}
+.al,.ar,.ll,.lr{transform-box:fill-box;transform-origin:center top}
+.eye{transform-box:fill-box;transform-origin:center center}
+
+/* walking */
+#am.walk{animation:am-bob .45s ease-in-out infinite}
+#am.walk .ll{animation:am-ll .45s ease-in-out infinite}
+#am.walk .lr{animation:am-lr .45s ease-in-out infinite}
+#am.walk .al{animation:am-al .45s ease-in-out infinite}
+#am.walk .ar{animation:am-ar .45s ease-in-out infinite}
+/* waving */
+#am.wave{animation:am-idle .7s ease-in-out infinite}
+#am.wave .ar{animation:am-wave .55s ease-in-out 3 forwards}
+/* jumping */
+#am.jump{animation:am-jump .62s cubic-bezier(.36,.07,.19,.97) forwards}
+/* spinning */
+#am.spin{animation:am-spin .72s ease-in-out forwards}
+/* excited */
+#am.excite{animation:am-shake .15s ease-in-out 6}
+#am.excite .al{animation:am-al-ex .32s ease-in-out 3}
+#am.excite .ar{animation:am-ar-ex .32s ease-in-out 3 .16s}
+/* blinking */
+#am.blink{animation:am-idle .9s ease-in-out infinite}
+#am.blink .eye{animation:am-blink .15s ease-in-out 2}
+/* idle */
+#am.idle{animation:am-idle 1.1s ease-in-out infinite}
+
+@keyframes am-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes am-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes am-ll{0%,100%{transform:rotate(-22deg)}50%{transform:rotate(22deg)}}
+@keyframes am-lr{0%,100%{transform:rotate(22deg)}50%{transform:rotate(-22deg)}}
+@keyframes am-al{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-15deg)}}
+@keyframes am-ar{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(15deg)}}
+@keyframes am-wave{
+  0%{transform:rotate(0)}
+  25%{transform:rotate(115deg)}
+  55%{transform:rotate(132deg)}
+  75%{transform:rotate(112deg)}
+  100%{transform:rotate(0)}
+}
+@keyframes am-jump{
+  0%{transform:translateY(0) scaleX(1) scaleY(1)}
+  15%{transform:translateY(3px) scaleX(1.15) scaleY(.85)}
+  45%{transform:translateY(-28px) scaleX(.9) scaleY(1.12)}
+  75%{transform:translateY(3px) scaleX(1.12) scaleY(.9)}
+  100%{transform:translateY(0) scaleX(1) scaleY(1)}
+}
+@keyframes am-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes am-shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-6px) rotate(-5deg)}
+  75%{transform:translateX(6px) rotate(5deg)}
+}
+@keyframes am-al-ex{0%,100%{transform:rotate(0)}50%{transform:rotate(-120deg)}}
+@keyframes am-ar-ex{0%,100%{transform:rotate(0)}50%{transform:rotate(120deg)}}
+@keyframes am-blink{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.06)}}
+
+/* speech bubble */
+#am-bub{
+  position:absolute;
+  bottom:calc(100% + 22px);
+  left:50%;
+  transform:translateX(-50%) scale(0);
+  transform-origin:center bottom;
+  background:#00E5A0;color:#0A0A0A;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:.02em;
+  padding:5px 10px;border-radius:10px;
+  white-space:nowrap;pointer-events:none;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1);
+  line-height:1.3;
+}
+#am-bub::after{
+  content:'';position:absolute;
+  bottom:-5px;left:50%;
+  transform:translateX(-50%);
+  width:0;height:0;
+  border-left:5px solid transparent;
+  border-right:5px solid transparent;
+  border-top:5px solid #00E5A0;
+}
+#am-bub.on{transform:translateX(-50%) scale(1)}
+</style>
+
+<div id="am-wrap">
+  <div id="am" class="idle">
+    <div id="am-bub"></div>
+    <svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+      <!-- left antenna -->
+      <line x1="20" y1="17" x2="14" y2="5" stroke="#3DDC84" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="14" cy="4" r="3.5" fill="#3DDC84"/>
+      <!-- right antenna -->
+      <line x1="40" y1="17" x2="46" y2="5" stroke="#3DDC84" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="46" cy="4" r="3.5" fill="#3DDC84"/>
+      <!-- head dome -->
+      <path d="M8,32 A22,22 0 0,1 52,32 Z" fill="#3DDC84"/>
+      <!-- left eye -->
+      <g class="eye">
+        <circle cx="22" cy="24" r="5" fill="white"/>
+        <circle cx="22" cy="25.2" r="2.8" fill="#0d1f14"/>
+        <circle cx="23.6" cy="23" r="1.3" fill="white"/>
+      </g>
+      <!-- right eye -->
+      <g class="eye">
+        <circle cx="38" cy="24" r="5" fill="white"/>
+        <circle cx="38" cy="25.2" r="2.8" fill="#0d1f14"/>
+        <circle cx="39.6" cy="23" r="1.3" fill="white"/>
+      </g>
+      <!-- body -->
+      <rect x="8" y="32" width="44" height="36" rx="5" fill="#3DDC84"/>
+      <!-- screen detail on chest -->
+      <rect x="15" y="38" width="30" height="18" rx="3" fill="#1a5c3a" opacity=".92"/>
+      <circle cx="22" cy="47" r="2.5" fill="#00E5A0"/>
+      <circle cx="30" cy="47" r="2.5" fill="#00E5A0"/>
+      <circle cx="38" cy="47" r="2.5" fill="#00E5A0"/>
+      <!-- left arm -->
+      <rect class="al" x="-1" y="32" width="9" height="24" rx="4.5" fill="#3DDC84"/>
+      <!-- right arm -->
+      <rect class="ar" x="52" y="32" width="9" height="24" rx="4.5" fill="#3DDC84"/>
+      <!-- left leg -->
+      <rect class="ll" x="12" y="66" width="13" height="22" rx="6.5" fill="#3DDC84"/>
+      <!-- right leg -->
+      <rect class="lr" x="35" y="66" width="13" height="22" rx="6.5" fill="#3DDC84"/>
+    </svg>
+  </div>
+</div>
+
+<script>
+(function(){
+  if(window.innerWidth>768)return;
+  var el=document.getElementById('am');
+  var bub=document.getElementById('am-bub');
+  if(!el)return;
+
+  var x=-60,lastT=null,rafId=null,timer=null,active=true;
+  var SPEED=38;
+  var msgs=['hi :)','beep boop','< / >','*wave*',':D','tap me!','anik.sh','android!','^_^','...'];
+  var anims=['wave','jump','spin','excite','blink'];
+  var dur={wave:1750,jump:700,spin:800,excite:1100,blink:750};
+
+  function pos(){ el.style.left=x+'px'; }
+  function cls(c){ el.className=c; }
+
+  function showBub(msg){
+    bub.textContent=msg;
+    bub.classList.add('on');
+    setTimeout(function(){ bub.classList.remove('on'); },1900);
+  }
+
+  function doIdle(){
+    active=false;
+    cancelAnimationFrame(rafId);
+    var a=anims[Math.floor(Math.random()*anims.length)];
+    cls(a);
+    timer=setTimeout(resume, dur[a]+280);
+  }
+
+  function resume(){
+    active=true; lastT=null;
+    cls('walk');
+    rafId=requestAnimationFrame(tick);
+    timer=setTimeout(doIdle, 2800+Math.random()*5200);
+  }
+
+  function tick(t){
+    if(!active)return;
+    if(!lastT) lastT=t;
+    var dt=Math.min((t-lastT)/1000,.05);
+    lastT=t;
+    x+=SPEED*dt;
+    if(x>window.innerWidth+12) x=-60;
+    pos();
+    rafId=requestAnimationFrame(tick);
+  }
+
+  el.addEventListener('click',function(){
+    clearTimeout(timer);
+    cancelAnimationFrame(rafId);
+    active=false;
+    cls('excite');
+    showBub(msgs[Math.floor(Math.random()*msgs.length)]);
+    timer=setTimeout(resume, 1200);
+  });
+
+  setTimeout(function(){ pos(); resume(); }, 1000);
+})();
+</script>
