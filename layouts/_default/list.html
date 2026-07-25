@@ -1,76 +1,57 @@
 {{- define "main" }}
 
 {{- if .IsHome }}
-<div class="term-hero">
+<div class="paper-home">
 
-  {{/* ── Profile panel ── */}}
-  <div class="term-panel">
-    <span class="term-panel-title">profile</span>
+  <h1 class="paper-intro-name">Anik Raj C</h1>
 
-    <div class="term-hero-body">
-      <div class="term-info">
-        <div class="term-kv">
-          <span class="term-k">user</span>
-          <span class="term-sep">:</span>
-          <span class="term-v">Anik Raj C</span>
-        </div>
-        <div class="term-kv">
-          <span class="term-k">role</span>
-          <span class="term-sep">:</span>
-          <span class="term-v">
-            <span class="term-v-accent">android</span>
-            &nbsp;@&nbsp;
-            <a href="https://www.swiggy.com/" class="term-v-link" target="_blank" rel="noopener noreferrer">swiggy</a>
-          </span>
-        </div>
-        <div class="term-kv">
-          <span class="term-k">focus</span>
-          <span class="term-sep">:</span>
-          <span class="term-v">mobile engineering, kotlin, testing</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="term-hero-actions">
-      <a href="/blog/" class="term-btn term-btn-primary">[ blog ]</a>
-      <a href="https://github.com/anikrajc" class="term-btn" target="_blank" rel="noopener noreferrer">[ github ]</a>
-    </div>
-
-    <div class="term-social-bar">
-      {{- range site.Params.socialIcons }}
-      {{- $label := .name | lower }}
-      {{- if eq $label "x" }}{{- $label = "tw" }}{{- end }}
-      {{- if eq $label "linkedin" }}{{- $label = "in" }}{{- end }}
-      {{- if eq $label "github" }}{{- $label = "gh" }}{{- end }}
-      <span class="term-social-item">
-        <span class="term-social-key">{{ $label }}</span>
-        <span class="term-social-dash">─</span>
-        <a href="{{ .url | safeURL }}" target="_blank" rel="noopener noreferrer me">{{ .url | replaceRE `https?://(www\.)?` `` | replaceRE `/$` `` }}</a>
-      </span>
-      {{- end }}
-    </div>
+  <div class="paper-intro-body">
+    <p>
+      I build Android apps at
+      <a href="https://www.swiggy.com/" class="paper-link" target="_blank" rel="noopener noreferrer">Swiggy</a>.
+      Mostly I think about mobile engineering, Kotlin, and how to make testing
+      fast enough that people actually run it.
+    </p>
+    <p>
+      I write here occasionally — usually about something that annoyed me
+      enough to go fix it.
+    </p>
   </div>
 
-  {{/* ── Posts panel ── */}}
+  <div class="paper-meta">
+    {{- range site.Params.socialIcons }}
+    <span class="paper-meta-item">
+      <span class="paper-meta-key">{{ .name | lower }}</span>
+      <span class="paper-meta-val">
+        <a href="{{ .url | safeURL }}" target="_blank" rel="noopener noreferrer me">
+          {{- .url | replaceRE `https?://(www\.)?` `` | replaceRE `/$` `` -}}
+        </a>
+      </span>
+    </span>
+    {{- end }}
+  </div>
+
+  {{/* ── Writing ── */}}
   {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
   {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
   {{- if gt (len $pages) 0 }}
-  <div class="term-panel term-posts" style="margin-top: 16px;">
-    <span class="term-panel-title">recent posts</span>
-    <div class="term-posts-inner">
+  <section class="paper-section">
+    <p class="paper-section-label">Writing</p>
+    <div class="paper-list">
       {{- range $pages }}
-      <div class="term-post-row">
-        <span class="term-post-bullet">▶</span>
-        <span class="term-post-title">
+      <article class="paper-item">
+        <span class="paper-item-title">
           {{- .Title }}
-          {{- if .Draft }}&nbsp;<span style="color:var(--t-muted);font-size:0.65rem;">[draft]</span>{{- end }}
+          {{- if .Draft }}<span class="paper-draft">draft</span>{{- end }}
         </span>
-        <span class="term-post-date">{{ .Date.Format "Jan 2006" }}</span>
-        <a class="term-post-link" aria-label="{{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-      </div>
+        <time class="paper-item-date" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{- .Date.Format "Jan 2006" -}}
+        </time>
+        <a class="paper-item-link" aria-label="{{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+      </article>
       {{- end }}
     </div>
-  </div>
+  </section>
   {{- end }}
 
 </div>
