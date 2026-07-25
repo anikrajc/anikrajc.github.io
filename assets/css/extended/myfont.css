@@ -1,39 +1,42 @@
+/* ── Type stack ────────────────────────────────────────── */
+
+:root {
+  --font-sans:  "Figtree", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:  "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+                Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-pixel: "Geist Mono", ui-monospace, monospace;
+
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+}
+
 body {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
-/* Keep terminal UI and code in monospace */
-code,
-pre,
-kbd,
-.logo a,
-#menu li a,
-.term-panel,
-.term-panel * {
-  font-family: "JetBrains Mono", monospace;
-}
-
-.giscus-frame {
-  background: unset;
-}
-
-code {
-  font-family: "JetBrains Mono";
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
   font-optical-sizing: auto;
   font-style: normal;
 }
 
+/* Giscus comments blend into the paper background */
+.giscus-frame {
+  background: unset;
+}
+
+/* Kotlin playground embeds */
 .js-code-output-executor {
-  border-radius: 10px;
+  border-radius: 6px;
   overflow: hidden;
 }
 
 .executable-fragment {
   background-color: unset;
   background: unset;
-  border-radius: 10px;
-  border: 0px solid #f00;
-  /* Optional: Add a border */
+  border-radius: 6px;
+  border: 0;
 }
 
 .executable-fragment .run-button {
@@ -41,13 +44,10 @@ code {
   height: 15px;
   top: 8px;
   right: 8px;
-  /* background: red; */
 }
 
 .CodeMirror {
-  border-radius: 8px;
-  /* Adjust the value as needed */
+  border-radius: 6px;
   padding-bottom: 20px;
   overflow: hidden;
-  /* Ensures content doesn't overflow the rounded edges */
 }
