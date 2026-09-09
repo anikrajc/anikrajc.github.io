@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroidKit — Privacy Policy</title>
+  <meta name="description" content="Privacy policy for DroidKit, an Android developer toolkit app. DroidKit collects no personal data; everything stays on your device.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Paper theme — light-first, ink on paper, orange accent. Mirrors
+       assets/css/extended/paper-theme.css, inlined because static/ files
+       bypass Hugo's asset pipeline. */
+    :root {
+      --p-paper:   #fafafa;
+      --p-surface: #ffffff;
+      --p-ink:     #1a1a1a;
+      --p-muted:   #8a8a8a;
+      --p-line:    #e4e4e4;
+      --p-accent:  #fb4d08;
+      --p-accent-soft: rgba(251, 77, 8, 0.08);
+      --code-bg:   #f4f4f5;
+      --radius:    6px;
+
+      --font-sans: "Figtree", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --p-paper:   #0f0f10;
+        --p-surface: #1a1a1c;
+        --p-ink:     #ececec;
+        --p-muted:   #8f8f8f;
+        --p-line:    #2a2a2c;
+        --p-accent-soft: rgba(251, 77, 8, 0.14);
+        --code-bg:   #17171a;
+
+        color-scheme: dark;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: var(--p-paper);
+      color: var(--p-ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 65ch;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    .back {
+      display: inline-block;
+      color: var(--p-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-family: var(--font-mono);
+      margin-bottom: 40px;
+    }
+    .back:hover { color: var(--p-accent); }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+
+    .meta {
+      color: var(--p-muted);
+      font-size: 14px;
+      font-family: var(--font-mono);
+      margin: 0 0 40px;
+    }
+
+    h2 {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 40px 0 12px;
+      padding-top: 24px;
+      border-top: 1px solid var(--p-line);
+    }
+
+    p { color: var(--p-ink); margin: 0 0 14px; }
+    strong { font-weight: 600; }
+
+    a { color: var(--p-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    ul { padding-left: 20px; margin: 0 0 14px; }
+    li { margin-bottom: 8px; }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.86em;
+      background: var(--code-bg);
+      border: 1px solid var(--p-line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+
+    .callout {
+      background: var(--p-accent-soft);
+      border: 1px solid var(--p-line);
+      border-left: 3px solid var(--p-accent);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 14px;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--p-line);
+      vertical-align: top;
+    }
+    th {
+      color: var(--p-muted);
+      font-weight: 500;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    td code { white-space: nowrap; }
+
+    .table-scroll { overflow-x: auto; }
+
+    footer {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--p-line);
+      color: var(--p-muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/">← anik.sh</a>
+
+    <h1>DroidKit Privacy Policy</h1>
+    <p class="meta">Last updated: 10 September 2026</p>
+
+    <div class="callout">
+      <p><strong>The short version:</strong> DroidKit does not collect, transmit, or sell any personal
+      information. There is no account, no sign-in, no analytics, no advertising, and no tracking.
+      Everything the app stores stays on your device.</p>
+    </div>
+
+    <h2>Who this covers</h2>
+    <p>DroidKit is an Android developer toolkit published by Anik Raj C
+    (package <code>com.anikrajc.droidkit</code>). This policy explains what the app does and does not
+    do with data.</p>
+
+    <h2>Information collected</h2>
+    <p><strong>None.</strong> DroidKit contains no analytics SDK, no crash-reporting SDK, no
+    advertising SDK, and no telemetry of any kind. The app does not ask for your name, email address,
+    phone number, contacts, location, or any other personal identifier, and it has no server of its
+    own to send anything to.</p>
+
+    <h2>Data stored on your device</h2>
+    <p>The app saves a small amount of data locally so it is useful across launches:</p>
+    <ul>
+      <li>Your deep link execution history, including any entries you star</li>
+      <li>Your preferences, such as the selected target app and toggle states</li>
+    </ul>
+    <p>This is written to Android's private app storage
+    (<code>SharedPreferences</code>), which is readable only by DroidKit. It is never uploaded
+    anywhere. You can erase it at any time using <strong>Clear history</strong> inside the app, or by
+    uninstalling DroidKit or clearing its storage in Android Settings.</p>
+
+    <h2>Permissions and why they are needed</h2>
+    <p>DroidKit requests the following permissions purely to perform its on-device functions. Data
+    read through them is shown to you and is never transmitted.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Permission</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>QUERY_ALL_PACKAGES</code></td>
+            <td>Lists your installed apps so you can pick which one should handle a deep link, and shows which apps match a given URI.</td>
+          </tr>
+          <tr>
+            <td><code>SYSTEM_ALERT_WINDOW</code></td>
+            <td>Draws the optional floating bubble launcher over other apps, so you can re-run a deep link while testing. Optional and off by default.</td>
+          </tr>
+          <tr>
+            <td><code>WRITE_SECURE_SETTINGS</code></td>
+            <td>Applies developer toggles such as layout bounds and animation scales. Android only grants this manually via <code>adb</code>.</td>
+          </tr>
+          <tr>
+            <td><code>ACCESS_NETWORK_STATE</code><br><code>ACCESS_WIFI_STATE</code></td>
+            <td>Reads network and Wi-Fi status for the network inspector. Read-only.</td>
+          </tr>
+          <tr>
+            <td><code>INTERNET</code></td>
+            <td>Required by Android so the links and intents you launch can open.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Third-party services</h2>
+    <p>Pre-release builds of DroidKit are distributed to testers through
+    <strong>Firebase App Distribution</strong>, a Google service. If you install a pre-release build
+    as an invited tester, Google processes your email address and basic device information in order
+    to deliver that build to you. That processing is governed by
+    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>,
+    not by this one. This applies only to build delivery — the app itself contains no Firebase
+    data-collection SDKs.</p>
+
+    <h2>Links you open</h2>
+    <p>When you execute a deep link or URL, Android hands it to another app or browser of your
+    choosing. What that app does with it is covered by its own privacy policy, not this one.</p>
+
+    <h2>Children</h2>
+    <p>DroidKit is a developer utility and is not directed at children under 13. It collects no data
+    from anyone, including children.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If DroidKit's data practices ever change — for example if crash reporting is added in a future
+    release — this page will be updated and the date at the top revised. Material changes will also
+    be noted in the app's release notes.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy: <a href="mailto:anikraj1994@gmail.com">anikraj1994@gmail.com</a></p>
+
+    <footer>
+      DroidKit — an Android developer toolkit by
+      <a href="https://anik.sh">Anik Raj C</a>.
+    </footer>
+  </div>
+</body>
+</html>
