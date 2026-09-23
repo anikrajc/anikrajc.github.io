@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Anik Raj C is an Android engineer at Swiggy. Writing, toolchain, DroidKit, and a phone you can use.">
+<title>Anik Raj C · Android</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Geist+Mono:wght@400;500;600&display=swap">
+<style>
+/* Tokens: mirror the site's paper theme (orange accent, Figtree + Geist Mono),
+   with an Android-green secondary used only for "device online" signals. */
+:root {
+  --paper: #fafaf9;
+  --surface: #ffffff;
+  --sunken: #f3f1ef;
+  --ink: #1a1816;
+  --ink-2: #4a4541;
+  --muted: #7c7672;
+  --line: #e7e3e0;
+  --line-2: #d8d2cd;
+  --accent: #fb4d08;
+  --accent-ink: #cf3d02;
+  --accent-soft: rgba(251, 77, 8, 0.08);
+  --droid: #178a4c;
+  --droid-soft: rgba(23, 138, 76, 0.1);
+  --lv-v: #8b8580; --lv-d: #2f6fcf; --lv-i: #178a4c; --lv-w: #b87400; --lv-e: #d0302a;
+  --shadow: 0 1px 2px rgba(40, 20, 10, .06), 0 12px 40px -12px rgba(40, 20, 10, .18);
+  --sans: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --anim: 1;
+  --max: 1160px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f0e0e; --surface: #181716; --sunken: #141312;
+    --ink: #eeebe8; --ink-2: #bdb7b2; --muted: #8f8984;
+    --line: #2a2826; --line-2: #3a3734;
+    --accent: #ff5a1a; --accent-ink: #ff7c47; --accent-soft: rgba(255, 90, 26, .12);
+    --droid: #3ddc84; --droid-soft: rgba(61, 220, 132, .12);
+    --lv-v: #8f8984; --lv-d: #6ea8ff; --lv-i: #3ddc84; --lv-w: #f2b441; --lv-e: #ff6b61;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 48px -16px rgba(0,0,0,.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f0e0e; --surface: #181716; --sunken: #141312;
+  --ink: #eeebe8; --ink-2: #bdb7b2; --muted: #8f8984;
+  --line: #2a2826; --line-2: #3a3734;
+  --accent: #ff5a1a; --accent-ink: #ff7c47; --accent-soft: rgba(255, 90, 26, .12);
+  --droid: #3ddc84; --droid-soft: rgba(61, 220, 132, .12);
+  --lv-v: #8f8984; --lv-d: #6ea8ff; --lv-i: #3ddc84; --lv-w: #f2b441; --lv-e: #ff6b61;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 48px -16px rgba(0,0,0,.7);
+  color-scheme: dark;
+}
+@media (prefers-reduced-motion: reduce) { :root { --anim: 0.001; } }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+img { max-width: 100%; }
+.wrap { max-width: var(--max); margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); }
+.mono { font-family: var(--mono); }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ── Top bar: styled like an Android status bar ── */
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40;
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar .wrap { display: flex; align-items: center; gap: 20px; height: 52px; }
+.logo { font-family: var(--mono); font-weight: 600; font-size: 14px; text-decoration: none; letter-spacing: -.01em; }
+.logo b { color: var(--accent); font-weight: 600; }
+.nav { display: flex; gap: 4px; margin-left: auto; }
+.nav a {
+  font-size: 14px; font-weight: 500; text-decoration: none; color: var(--ink-2);
+  padding: 6px 10px; border-radius: 999px;
+  transition: background calc(var(--anim) * 160ms), color calc(var(--anim) * 160ms);
+}
+.nav a:hover { background: var(--accent-soft); color: var(--ink); }
+.sysicons { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); }
+.sysicons svg { display: block; }
+@media (max-width: 720px) { .nav { display: none; } .sysicons { margin-left: auto; } }
+
+/* ── Hero ── */
+.hero { padding-block: clamp(40px, 7vw, 88px) clamp(40px, 6vw, 72px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+@media (max-width: 920px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+.adb-chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 12.5px; color: var(--ink-2);
+  border: 1px solid var(--line-2); border-radius: 999px; padding: 5px 12px 5px 10px;
+  background: var(--surface);
+}
+.adb-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--droid); box-shadow: 0 0 0 0 var(--droid); animation: ping calc(var(--anim) * 2.2s) infinite; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--droid) 60%, transparent); } 80%,100% { box-shadow: 0 0 0 8px transparent; } }
+.hero h1 {
+  font-size: clamp(48px, 8.4vw, 104px);
+  line-height: .92; letter-spacing: -.045em; font-weight: 900;
+  margin: 22px 0 0;
+  text-wrap: balance;
+}
+.hero h1 .dot { color: var(--accent); }
+.hero-lede {
+  font-size: clamp(19px, 2.1vw, 24px); line-height: 1.4; font-weight: 500;
+  color: var(--ink-2); letter-spacing: -.01em;
+  margin: 22px 0 0; max-width: 30ch; text-wrap: balance;
+}
+.hero-lede em { font-style: normal; color: var(--ink); box-shadow: inset 0 -.36em 0 var(--accent-soft); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.btn {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 44px; padding: 0 20px; border-radius: 999px;
+  font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer;
+  border: 1px solid var(--line-2); background: var(--surface);
+  transition: transform calc(var(--anim) * 140ms), border-color calc(var(--anim) * 140ms);
+}
+.btn:hover { border-color: var(--ink-2); }
+.btn:active { transform: scale(.97); }
+.btn-primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.btn-primary:hover { border-color: var(--ink); }
+
+.getprop {
+  margin-top: 36px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+  font-family: var(--mono); font-size: 13px; line-height: 1.75; overflow: hidden;
+}
+.getprop-head { display: flex; gap: 8px; align-items: center; padding: 8px 14px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; background: var(--sunken); }
+.getprop-head .prompt { color: var(--droid); }
+.getprop pre { margin: 0; padding: 12px 14px; overflow-x: auto; }
+.getprop .k { color: var(--muted); }
+.getprop .v { color: var(--ink); }
+.getprop .s { color: var(--accent-ink); }
+
+/* ── Phone ── */
+.phone-col { display: flex; flex-direction: column; align-items: center; gap: 14px; min-width: 0; }
+.phone-fit { width: 100%; display: flex; justify-content: center; }
+.phone {
+  width: 340px; height: 720px; flex: none;
+  border-radius: 46px; padding: 11px;
+  background: linear-gradient(160deg, #3b3632, #151312 40%, #262220);
+  box-shadow: 0 0 0 1.5px #57504a inset, 0 40px 80px -30px rgba(60, 20, 0, .45), 0 18px 36px -18px rgba(0,0,0,.5);
+  position: relative;
+}
+.phone::before { /* power + volume keys */
+  content: ""; position: absolute; right: -3px; top: 150px; width: 3px; height: 64px; border-radius: 0 3px 3px 0; background: #2d2926;
+  box-shadow: 0 96px 0 0 #2d2926;
+}
+.screen {
+  --p: #ffb599; --on-p: #5a1b00; --pc: #802a00; --on-pc: #ffdbce;
+  --sc: #5d4034; --on-sc: #ffdbce; --t: #d0c88f;
+  --s: #1a110e; --s1: #231915; --s2: #2a201c; --s3: #352a26;
+  --on-s: #f1dfd9; --on-sv: #d8c2ba; --ol: #a08d86; --olv: #53433e;
+  position: relative; width: 100%; height: 100%; border-radius: 36px; overflow: hidden;
+  background: var(--s); color: var(--on-s);
+  font-family: var(--sans);
+  isolation: isolate;
+  -webkit-user-select: none; user-select: none;
+}
+.wall { position: absolute; inset: 0; z-index: -1; background:
+  radial-gradient(120% 70% at 110% 8%, #7d2a05 0%, transparent 55%),
+  radial-gradient(90% 60% at -20% 45%, #4a2a1e 0%, transparent 60%),
+  radial-gradient(100% 60% at 60% 110%, #5d2206 0%, transparent 60%),
+  #1a110e; }
+.wall::after { content: ""; position: absolute; left: 50%; top: 60%; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 42%;
+  border: 38px solid rgba(255, 181, 153, .05); animation: spin calc(var(--anim) * 60s) linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.sbar { position: absolute; top: 0; left: 0; right: 0; height: 36px; display: flex; align-items: center; padding: 0 22px; font-size: 13px; font-weight: 600; z-index: 5; font-variant-numeric: tabular-nums; }
+.sbar .cam { position: absolute; left: 50%; top: 10px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #070606; box-shadow: 0 0 0 2px #1d1917; }
+.sbar .icons { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+.navpill { position: absolute; bottom: 7px; left: 50%; width: 108px; height: 5px; margin-left: -54px; border-radius: 3px; background: var(--on-s); opacity: .85; z-index: 6; border: 0; padding: 0; cursor: pointer; }
+.navhit { position: absolute; bottom: 0; left: 30%; right: 30%; height: 22px; z-index: 7; background: none; border: 0; cursor: pointer; }
+
+.home { position: absolute; inset: 36px 0 0; padding: 18px 18px 30px; display: flex; flex-direction: column; transition: transform calc(var(--anim) * 320ms) cubic-bezier(.2,0,0,1), opacity calc(var(--anim) * 320ms), filter calc(var(--anim) * 320ms); }
+.screen.app-open .home { transform: scale(.94); opacity: .35; filter: blur(2px); }
+.glance { padding: 6px 4px 0; }
+.glance .date { font-size: 15px; font-weight: 600; color: var(--on-s); }
+.glance .sub { font-size: 12.5px; color: var(--on-sv); display: flex; gap: 6px; align-items: center; margin-top: 2px; }
+.clock { margin: 20px 0 0; font-size: 84px; line-height: .86; font-weight: 800; letter-spacing: -.05em; color: var(--p); font-variant-numeric: tabular-nums; }
+.clock span { display: block; }
+.clock span:last-child { color: var(--on-pc); opacity: .9; padding-left: 38px; }
+.widget {
+  margin-top: 22px; border-radius: 26px; background: rgba(35, 25, 21, .72); padding: 14px 16px;
+  display: flex; gap: 12px; align-items: center; backdrop-filter: blur(6px);
+}
+.widget .ring { width: 44px; height: 44px; flex: none; }
+.widget .t1 { font-size: 13.5px; font-weight: 600; }
+.widget .t2 { font-size: 11.5px; color: var(--on-sv); line-height: 1.35; }
+.apps { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 6px; }
+.app { display: flex; flex-direction: column; align-items: center; gap: 6px; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: none; color: var(--on-s); font-size: 11.5px; font-weight: 500; border-radius: 16px; }
+.app .ic {
+  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--pc); color: var(--on-pc);
+  transition: transform calc(var(--anim) * 160ms) cubic-bezier(.2,0,0,1), border-radius calc(var(--anim) * 220ms);
+}
+.app:hover .ic { border-radius: 18px; }
+.app:active .ic { transform: scale(.9); }
+.app.alt .ic { background: var(--sc); color: var(--on-sc); }
+.search { margin-top: 18px; height: 50px; border-radius: 25px; background: var(--s3); display: flex; align-items: center; gap: 10px; padding: 0 18px; color: var(--on-sv); font-size: 14px; }
+.search .g { width: 22px; height: 22px; border-radius: 50%; background: var(--p); color: var(--on-p); display: grid; place-items: center; font-weight: 800; font-size: 12px; }
+
+.activity {
+  position: absolute; inset: 0; background: var(--s); z-index: 4;
+  display: flex; flex-direction: column; padding-top: 36px;
+  opacity: 0; transform: scale(.2); pointer-events: none; visibility: hidden;
+  transition: transform calc(var(--anim) * 380ms) cubic-bezier(.2,0,0,1), opacity calc(var(--anim) * 240ms), visibility 0s linear calc(var(--anim) * 380ms);
+  border-radius: 36px;
+}
+.activity.on { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition-delay: 0s; }
+.appbar { display: flex; align-items: center; gap: 6px; padding: 8px 10px 8px 6px; }
+.appbar h3 { margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -.01em; }
+.iconbtn { width: 44px; height: 44px; border-radius: 50%; border: 0; background: none; display: grid; place-items: center; cursor: pointer; color: var(--on-s); position: relative; overflow: hidden; }
+.iconbtn:hover { background: rgba(241, 223, 217, .08); }
+.act-body { flex: 1; overflow-y: auto; padding: 4px 16px 36px; scrollbar-width: none; }
+.act-body::-webkit-scrollbar { display: none; }
+.big-title { font-size: 30px; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; margin: 8px 4px 16px; }
+.pgroup { background: var(--s2); border-radius: 22px; overflow: hidden; margin-bottom: 12px; }
+.pgroup-label { font-size: 12.5px; color: var(--p); font-weight: 600; margin: 16px 8px 8px; }
+.pref { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border: 0; background: none; width: 100%; text-align: left; cursor: pointer; text-decoration: none; color: var(--on-s); position: relative; overflow: hidden; }
+.pref + .pref { border-top: 2px solid var(--s); }
+.pref .pi { width: 24px; flex: none; color: var(--p); display: grid; place-items: center; }
+.pref .pt { font-size: 15px; font-weight: 500; line-height: 1.3; }
+.pref .ps { font-size: 12.5px; color: var(--on-sv); line-height: 1.35; margin-top: 1px; }
+.pref .grow { flex: 1; min-width: 0; }
+.pref[aria-disabled="true"] { opacity: .4; cursor: not-allowed; }
+.sw { width: 52px; height: 32px; border-radius: 16px; border: 2px solid var(--ol); background: var(--s3); position: relative; flex: none; transition: background calc(var(--anim) * 200ms), border-color calc(var(--anim) * 200ms); }
+.sw::after { content: ""; position: absolute; top: 6px; left: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--ol); transition: all calc(var(--anim) * 220ms) cubic-bezier(.2,0,0,1); }
+[aria-checked="true"] .sw { background: var(--p); border-color: var(--p); }
+[aria-checked="true"] .sw::after { left: 22px; top: 2px; width: 24px; height: 24px; background: var(--on-p); }
+.avatar { width: 88px; height: 88px; border-radius: 30px; background: var(--p); color: var(--on-p); display: grid; place-items: center; font-weight: 900; font-size: 34px; letter-spacing: -.04em; margin: 8px auto 12px; transform: rotate(-4deg); }
+.center { text-align: center; }
+.pchips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 12px 0 16px; }
+.pchip { font-size: 12px; border: 1px solid var(--olv); color: var(--on-sv); border-radius: 8px; padding: 4px 10px; }
+.mini-log { font-family: var(--mono); font-size: 10.5px; line-height: 1.5; padding: 0 12px 36px; overflow-y: auto; flex: 1; color: var(--on-sv); scrollbar-width: none; }
+.mini-log div { white-space: pre-wrap; word-break: break-word; padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+.mini-log .I { color: #8fe3b1; } .mini-log .D { color: #9cc3ff; } .mini-log .W { color: #f3c570; } .mini-log .E { color: #ff9a92; }
+.toast {
+  position: absolute; left: 50%; bottom: 58px; transform: translate(-50%, 16px); z-index: 9;
+  background: #f1dfd9; color: #231915; font-size: 13px; font-weight: 500; line-height: 1.35;
+  padding: 10px 16px; border-radius: 12px; width: max-content; max-width: 84%; text-align: center;
+  opacity: 0; pointer-events: none; transition: all calc(var(--anim) * 220ms) cubic-bezier(.2,0,0,1);
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+.phone-hint { font-size: 13px; color: var(--muted); text-align: center; max-width: 34ch; line-height: 1.5; }
+.phone-hint b { color: var(--ink-2); font-weight: 600; }
+
+/* Ripple (Material state layer) */
+.ripple { position: relative; overflow: hidden; }
+.rip { position: absolute; border-radius: 50%; pointer-events: none; background: currentColor; opacity: .16; transform: scale(0); animation: rip calc(var(--anim) * 520ms) cubic-bezier(.2,0,0,1) forwards; }
+@keyframes rip { to { transform: scale(1); opacity: 0; } }
+
+/* ── Sections ── */
+section.block { padding-block: clamp(56px, 8vw, 104px); border-top: 1px solid var(--line); }
+.sec-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 32px; align-items: end; margin-bottom: 36px; }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; color: var(--accent-ink); letter-spacing: .02em; margin: 0 0 12px; }
+.sec-head h2 { font-size: clamp(32px, 4.6vw, 52px); line-height: 1; letter-spacing: -.035em; font-weight: 800; margin: 0; text-wrap: balance; }
+.sec-head p { margin: 14px 0 0; color: var(--ink-2); max-width: 58ch; }
+.sec-head .aside { font-family: var(--mono); font-size: 12.5px; color: var(--muted); text-align: right; }
+@media (max-width: 720px) { .sec-head { grid-template-columns: minmax(0, 1fr); } .sec-head .aside { text-align: left; } }
+
+/* Writing: a RecyclerView of posts */
+.posts { border-top: 1px solid var(--line-2); }
+.post {
+  display: grid; grid-template-columns: 112px minmax(0, 1fr) auto; gap: 8px 32px; align-items: baseline;
+  padding: 28px 8px; border-bottom: 1px solid var(--line); text-decoration: none; position: relative;
+  transition: background calc(var(--anim) * 200ms);
+}
+.post:hover { background: var(--accent-soft); }
+.post time { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.post h3 { margin: 0; font-size: clamp(20px, 2.4vw, 27px); line-height: 1.2; letter-spacing: -.02em; font-weight: 700; text-wrap: balance; }
+.post p { margin: 8px 0 0; color: var(--ink-2); max-width: 62ch; }
+.post .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tag { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); border: 1px solid var(--line-2); border-radius: 6px; padding: 1px 8px; }
+.post .pub { font-family: var(--mono); font-size: 12.5px; color: var(--muted); white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+.post .arrow { display: inline-block; transition: transform calc(var(--anim) * 200ms); color: var(--accent); }
+.post:hover .arrow { transform: translate(3px, -3px); }
+@media (max-width: 720px) { .post { grid-template-columns: minmax(0, 1fr); } .post .pub { order: -1; } }
+
+/* Toolchain: build.gradle.kts */
+.split { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+@media (max-width: 920px) { .split { grid-template-columns: minmax(0, 1fr); } }
+.principles { display: grid; gap: 22px; }
+.principle h4 { margin: 0; font-size: 18px; letter-spacing: -.01em; font-weight: 700; display: flex; gap: 10px; align-items: baseline; }
+.principle h4 .mono { font-size: 12px; color: var(--accent-ink); font-weight: 500; }
+.principle p { margin: 6px 0 0; color: var(--ink-2); }
+.code {
+  border-radius: 14px; overflow: hidden; border: 1px solid var(--line);
+  background: var(--surface); box-shadow: var(--shadow);
+}
+.code-tabs { display: flex; align-items: center; gap: 2px; background: var(--sunken); border-bottom: 1px solid var(--line); padding: 0 8px; font-family: var(--mono); font-size: 12.5px; }
+.code-tab { padding: 10px 12px; color: var(--muted); border: 0; background: none; cursor: pointer; border-bottom: 2px solid transparent; }
+.code-tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.code-tabs .sp { margin-left: auto; color: var(--muted); padding-right: 6px; }
+.code pre { margin: 0; padding: 18px 0; overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 1.75; counter-reset: ln; }
+.code .ln { display: block; padding: 0 20px 0 0; white-space: pre; }
+.code .ln::before { counter-increment: ln; content: counter(ln); display: inline-block; width: 44px; padding-right: 16px; text-align: right; color: var(--line-2); }
+.code .ln.hl { background: var(--accent-soft); }
+.c-k { color: #b1318a; } .c-s { color: #178a4c; } .c-c { color: var(--muted); font-style: italic; } .c-f { color: #2f6fcf; } .c-n { color: #b35c00; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .c-k { color: #e38bd0; } :root:not([data-theme="light"]) .c-s { color: #8fe3b1; } :root:not([data-theme="light"]) .c-f { color: #8ab4ff; } :root:not([data-theme="light"]) .c-n { color: #f2b441; } }
+:root[data-theme="dark"] .c-k { color: #e38bd0; } :root[data-theme="dark"] .c-s { color: #8fe3b1; } :root[data-theme="dark"] .c-f { color: #8ab4ff; } :root[data-theme="dark"] .c-n { color: #f2b441; }
+
+/* DroidKit: quick settings tiles that actually work */
+.qs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tile {
+  display: flex; gap: 14px; align-items: center; text-align: left;
+  min-height: 76px; padding: 14px 18px; border-radius: 22px; cursor: pointer;
+  border: 1px solid var(--line-2); background: var(--surface);
+  transition: background calc(var(--anim) * 220ms), border-color calc(var(--anim) * 220ms), color calc(var(--anim) * 220ms), border-radius calc(var(--anim) * 260ms);
+}
+.tile .ti { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--sunken); color: var(--ink-2); flex: none; transition: inherit; }
+.tile .tt { font-weight: 700; font-size: 15px; line-height: 1.25; }
+.tile .ts { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 2px; }
+.tile[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; border-radius: 14px; }
+.tile[aria-pressed="true"] .ti { background: rgba(255,255,255,.2); color: #fff; }
+.tile[aria-pressed="true"] .ts { color: rgba(255,255,255,.85); }
+@media (max-width: 460px) { .qs { grid-template-columns: minmax(0, 1fr); } }
+.features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 32px; margin-top: 36px; }
+@media (max-width: 600px) { .features { grid-template-columns: minmax(0, 1fr); } }
+.feature h4 { margin: 0; font-size: 16px; font-weight: 700; display: flex; gap: 10px; align-items: center; }
+.feature h4 svg { color: var(--accent); flex: none; }
+.feature p { margin: 6px 0 0; color: var(--ink-2); font-size: 15px; }
+.feature code, .perm code { font-family: var(--mono); font-size: .85em; background: var(--sunken); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; }
+.dk-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 30px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.dk-meta a { color: var(--accent-ink); text-decoration: none; }
+.dk-meta a:hover { text-decoration: underline; }
+
+/* Logcat */
+.logcat { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; box-shadow: var(--shadow); }
+.lc-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--sunken); }
+.lc-levels { display: flex; gap: 4px; }
+.lv { font-family: var(--mono); font-size: 12px; font-weight: 600; width: 30px; height: 28px; border-radius: 7px; border: 1px solid var(--line-2); background: var(--surface); cursor: pointer; color: var(--muted); }
+.lv[aria-pressed="true"] { color: var(--paper); }
+.lv[data-l="V"][aria-pressed="true"] { background: var(--lv-v); border-color: var(--lv-v); }
+.lv[data-l="D"][aria-pressed="true"] { background: var(--lv-d); border-color: var(--lv-d); }
+.lv[data-l="I"][aria-pressed="true"] { background: var(--lv-i); border-color: var(--lv-i); }
+.lv[data-l="W"][aria-pressed="true"] { background: var(--lv-w); border-color: var(--lv-w); }
+.lv[data-l="E"][aria-pressed="true"] { background: var(--lv-e); border-color: var(--lv-e); }
+.lc-filter { flex: 1; min-width: 160px; height: 30px; border-radius: 7px; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink); padding: 0 10px; font-family: var(--mono); font-size: 12.5px; }
+.lc-btn { font-family: var(--mono); font-size: 12px; height: 30px; padding: 0 12px; border-radius: 7px; border: 1px solid var(--line-2); background: var(--surface); cursor: pointer; color: var(--ink-2); }
+.lc-btn:hover { border-color: var(--ink-2); }
+.lc-out { height: 360px; overflow: auto; font-family: var(--mono); font-size: 12.5px; line-height: 1.7; padding: 8px 0; }
+.lc-line { display: grid; grid-template-columns: 94px 84px 18px 170px minmax(0, 1fr); gap: 10px; padding: 0 14px; white-space: nowrap; }
+.lc-line:hover { background: var(--sunken); }
+.lc-line .ts, .lc-line .pid { color: var(--muted); font-variant-numeric: tabular-nums; }
+.lc-line .lvl { font-weight: 700; text-align: center; }
+.lc-line .tag { overflow: hidden; text-overflow: ellipsis; border: 0; padding: 0; font-size: inherit; color: var(--ink-2); }
+.lc-line .msg { white-space: pre-wrap; word-break: break-word; }
+.lc-line.V .lvl, .lc-line.V .msg { color: var(--lv-v); }
+.lc-line.D .lvl { color: var(--lv-d); } .lc-line.I .lvl { color: var(--lv-i); }
+.lc-line.W .lvl, .lc-line.W .msg { color: var(--lv-w); }
+.lc-line.E .lvl, .lc-line.E .msg { color: var(--lv-e); }
+.lc-line.new { animation: flash calc(var(--anim) * 1.2s) ease-out; }
+@keyframes flash { from { background: var(--accent-soft); } to { background: transparent; } }
+.lc-foot { display: flex; justify-content: space-between; gap: 12px; padding: 8px 14px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+@media (max-width: 720px) {
+  .lc-line { grid-template-columns: 76px 16px minmax(0, 1fr); gap: 8px; white-space: normal; }
+  .lc-line .pid { display: none; }
+  .lc-line .tag { grid-column: 3; grid-row: 1; font-weight: 600; }
+  .lc-line .msg { grid-column: 2 / 4; }
+  .lc-line .ts { grid-row: 1; }
+}
+
+/* Contact: intents */
+.intents { display: grid; gap: 10px; }
+.intent {
+  display: grid; grid-template-columns: 120px minmax(0, 1fr) auto auto; gap: 16px; align-items: center;
+  padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+}
+.intent .who { font-weight: 700; }
+.intent code { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); overflow-x: auto; white-space: nowrap; display: block; scrollbar-width: thin; padding-block: 4px; }
+.intent code .u { color: var(--accent-ink); }
+.intent a, .intent button { font-family: var(--mono); font-size: 12.5px; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--surface); color: var(--ink); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; }
+.intent a { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+@media (max-width: 720px) { .intent { grid-template-columns: minmax(0, 1fr) auto auto; } .intent code { grid-column: 1 / -1; grid-row: 2; } }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+footer a { color: var(--ink-2); text-decoration: none; }
+footer a:hover { color: var(--accent-ink); }
+.buildno { background: none; border: 0; padding: 0; cursor: pointer; font-family: inherit; font-size: inherit; color: var(--muted); border-bottom: 1px dashed var(--line-2); }
+footer .right { margin-left: auto; display: flex; gap: 18px; }
+
+/* Page toast (snackbar) */
+.snack { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); z-index: 80;
+  background: var(--ink); color: var(--paper); font-size: 14px; padding: 12px 18px; border-radius: 10px; opacity: 0; pointer-events: none;
+  transition: all calc(var(--anim) * 220ms) cubic-bezier(.2,0,0,1); max-width: calc(100vw - 32px); }
+.snack.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ── Developer options, applied to the whole page ── */
+html.bounds body *:not(svg):not(svg *):not(.gpu):not(.ptr-bar) { outline: 1px solid rgba(255, 32, 96, .55) !important; outline-offset: -1px; }
+html.bounds body :is(section, article, a, button, .phone, .code, .logcat, .tile, .intent, h1, h2, h3, p) {
+  background-image:
+    linear-gradient(#ff2060, #ff2060), linear-gradient(#ff2060, #ff2060), linear-gradient(#ff2060, #ff2060), linear-gradient(#ff2060, #ff2060),
+    linear-gradient(#ff2060, #ff2060), linear-gradient(#ff2060, #ff2060), linear-gradient(#ff2060, #ff2060), linear-gradient(#ff2060, #ff2060) !important;
+  background-repeat: no-repeat !important;
+  background-size: 6px 2px, 2px 6px, 6px 2px, 2px 6px, 6px 2px, 2px 6px, 6px 2px, 2px 6px !important;
+  background-position: 0 0, 0 0, 100% 0, 100% 0, 0 100%, 0 100%, 100% 100%, 100% 100% !important;
+}
+html.bounds body :is(section, article, a, button, .code, .logcat, .tile, .intent, h1, h2, h3, p) { box-shadow: 0 0 0 1px rgba(64, 128, 255, .35) !important; }
+.gpu { position: fixed; left: 0; bottom: env(safe-area-inset-bottom, 0px); z-index: 90; pointer-events: none; width: 100%; height: 120px; }
+.ptr-canvas { position: fixed; inset: 0; z-index: 88; pointer-events: none; width: 100vw; height: 100vh; }
+.ptr-bar { position: fixed; left: 0; right: 0; top: env(safe-area-inset-top, 0px); z-index: 89; pointer-events: none;
+  display: grid; grid-template-columns: repeat(7, auto); justify-content: space-between; gap: 8px;
+  padding: 3px 10px; background: rgba(0, 0, 0, .78); color: #fff; font-family: var(--mono); font-size: 11.5px; white-space: nowrap; overflow: hidden; }
+@media (max-width: 640px) { .ptr-bar { grid-template-columns: repeat(4, auto); } .ptr-bar span:nth-child(n+5) { display: none; } }
+.dev-fab { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 70;
+  display: inline-flex; gap: 8px; align-items: center; height: 44px; padding: 0 16px 0 12px; border-radius: 14px;
+  border: 1px solid var(--line-2); background: var(--surface); box-shadow: var(--shadow); cursor: pointer; font-family: var(--mono); font-size: 12.5px; }
+.dev-fab svg { color: var(--accent); }
+.dev-sheet { position: fixed; right: 16px; bottom: calc(70px + env(safe-area-inset-bottom, 0px)); z-index: 71; width: min(340px, calc(100vw - 32px));
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: 18px; box-shadow: var(--shadow); padding: 14px; }
+.dev-sheet h5 { margin: 2px 4px 10px; font-size: 15px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+.dev-sheet h5 span { font-family: var(--mono); font-size: 11.5px; color: var(--muted); font-weight: 400; }
+.dev-sheet .qs { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+.dev-sheet .tile { min-height: 58px; padding: 8px 12px; border-radius: 14px; }
+.dev-sheet .tile .ti { width: 34px; height: 34px; }
+</style>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="https://anik.sh/">~/anik<b>.</b>sh</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#writing">Writing</a>
+      <a href="#toolchain">Toolchain</a>
+      <a href="#droidkit">DroidKit</a>
+      <a href="#logcat">Logcat</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="sysicons" aria-label="Status">
+      <span class="tnum" id="topClock">--:--</span>
+      <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true"><path d="M8 11.5 15.4 3A11.3 11.3 0 0 0 .6 3z" fill="currentColor"/></svg>
+      <svg width="26" height="12" viewBox="0 0 26 12" aria-hidden="true"><rect x=".75" y=".75" width="21.5" height="10.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="2.5" y="2.5" width="14.4" height="7" rx="1.6" fill="currentColor"/><rect x="23" y="4" width="2" height="4" rx="1" fill="currentColor"/></svg>
+      <span class="tnum">80%</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="adb-chip"><span class="adb-dot" aria-hidden="true"></span>List of devices attached · anik&nbsp;&nbsp;device</span>
+      <h1>Anik Raj C<span class="dot">.</span></h1>
+      <p class="hero-lede">Android engineer at Swiggy. I make builds <em>faster</em>, tests <em>sharper</em>, and test devices <em>last longer</em>.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary ripple" href="#writing">Read the writing
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        <a class="btn ripple" href="https://github.com/anikrajc" target="_blank" rel="noopener me">GitHub</a>
+        <a class="btn ripple" href="#droidkit">DroidKit</a>
+      </div>
+      <div class="getprop" aria-label="Device properties">
+        <div class="getprop-head"><span class="prompt">$</span> adb shell getprop | grep anik</div>
+<pre><span class="k">[ro.anik.role]</span>: <span class="s">[Android Engineer]</span>
+<span class="k">[ro.anik.company]</span>: <span class="s">[Swiggy]</span>
+<span class="k">[ro.anik.location]</span>: <span class="s">[Bengaluru, IN]</span>
+<span class="k">[ro.anik.focus]</span>: <span class="s">[gradle,testing,ci,performance]</span>
+<span class="k">[ro.anik.lang]</span>: <span class="s">[kotlin]</span>
+<span class="k">[persist.anik.charge_limit]</span>: <span class="s">[80]</span></pre>
+      </div>
+    </div>
+
+    <div class="phone-col">
+      <div class="phone-fit" id="phoneFit">
+      <div class="phone" id="phone">
+        <div class="screen" id="screen">
+          <div class="wall" aria-hidden="true"></div>
+          <div class="sbar" aria-hidden="true">
+            <span id="sbClock">--:--</span>
+            <span class="cam"></span>
+            <span class="icons">
+              <svg width="15" height="12" viewBox="0 0 16 12"><path d="M8 11.5 15.4 3A11.3 11.3 0 0 0 .6 3z" fill="currentColor"/></svg>
+              <svg width="14" height="12" viewBox="0 0 14 12"><path d="M1 11h2V8H1zm3.5 0h2V6h-2zM8 11h2V3.5H8zm3.5 0h2V1h-2z" fill="currentColor"/></svg>
+              <svg width="24" height="12" viewBox="0 0 26 12"><rect x=".75" y=".75" width="21.5" height="10.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="2.5" y="2.5" width="14.4" height="7" rx="1.6" fill="currentColor"/><rect x="23" y="4" width="2" height="4" rx="1" fill="currentColor"/></svg>
+            </span>
+          </div>
+
+          <div class="home" id="home">
+            <div class="glance">
+              <div class="date" id="glanceDate">Today</div>
+              <div class="sub">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+                Bengaluru · shipping Android at Swiggy</div>
+            </div>
+            <div class="clock" aria-hidden="true"><span id="clkH">--</span><span id="clkM">--</span></div>
+            <div class="widget">
+              <svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18" fill="none" stroke="#53433e" stroke-width="5"/><circle cx="22" cy="22" r="18" fill="none" stroke="#ffb599" stroke-width="5" stroke-linecap="round" stroke-dasharray="90.5 113.1" transform="rotate(-90 22 22)"/><path d="M23.5 13 17 24h5l-1.5 7L27 20h-5z" fill="#ffdbce"/></svg>
+              <div><div class="t1">80% · Charging on hold</div><div class="t2">Charge limit protects battery health on always-plugged test devices</div></div>
+            </div>
+            <div class="apps">
+              <button class="app ripple" data-open="about"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z"/></svg></span>About</button>
+              <button class="app ripple" data-open="blog"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm2 4v2h10V7zm0 4v2h10v-2zm0 4v2h7v-2z"/></svg></span>Writing</button>
+              <button class="app ripple" data-open="droidkit"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M6 10.5a6 6 0 0 1 12 0zm3-2.6a.9.9 0 1 0 0-1.8.9.9 0 0 0 0 1.8zm6 0a.9.9 0 1 0 0-1.8.9.9 0 0 0 0 1.8zM7.3 4.2 6 2.3l.8-.5 1.3 2zm9.4 0 1.3-1.9.8.5-1.3 2zM6 11.5h12v6a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/></svg></span>DroidKit</button>
+              <button class="app ripple" data-open="logcat"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 4 4-4 4M12 17h7"/></svg></span>Logcat</button>
+              <a class="app ripple alt" href="https://github.com/anikrajc" target="_blank" rel="noopener me"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></span>GitHub</a>
+              <a class="app ripple alt" href="https://x.com/anikrajc" target="_blank" rel="noopener me"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23zm-1.16 17.52h1.83L7.08 4.13H5.12z"/></svg></span>X</a>
+              <a class="app ripple alt" href="https://in.linkedin.com/in/anikrajc" target="_blank" rel="noopener me"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56z"/></svg></span>LinkedIn</a>
+              <button class="app ripple alt" data-open="settings"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg></span>Settings</button>
+            </div>
+            <div class="search"><span class="g">a</span>Search anik.sh</div>
+          </div>
+
+          <!-- Activities -->
+          <div class="activity" id="act-about" role="dialog" aria-label="About">
+            <div class="appbar"><button class="iconbtn ripple" data-back aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5m6-7-7 7 7 7"/></svg></button></div>
+            <div class="act-body">
+              <div class="avatar">AR</div>
+              <div class="center" style="font-size:24px;font-weight:700;letter-spacing:-.02em">Anik Raj C</div>
+              <div class="center" style="font-size:14px;color:var(--on-sv)">Android Engineer · Swiggy</div>
+              <div class="pchips"><span class="pchip">Kotlin</span><span class="pchip">Gradle</span><span class="pchip">Testing</span><span class="pchip">CI/CD</span><span class="pchip">Performance</span></div>
+              <div class="pgroup">
+                <div class="pref"><span class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 7h16v12H4zm5-3h6v3H9z"/></svg></span><span class="grow"><span class="pt">Swiggy</span><span class="ps" style="display:block">Android. Build tooling, test infrastructure, event verification</span></span></div>
+                <div class="pref"><span class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7z"/></svg></span><span class="grow"><span class="pt">Bengaluru, India</span></span></div>
+                <a class="pref ripple" href="https://anik.sh/" target="_blank" rel="noopener"><span class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></span><span class="grow"><span class="pt">anik.sh</span><span class="ps" style="display:block">Blog & notes</span></span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="activity" id="act-blog" role="dialog" aria-label="Writing">
+            <div class="appbar"><button class="iconbtn ripple" data-back aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5m6-7-7 7 7 7"/></svg></button><h3>Writing</h3></div>
+            <div class="act-body" id="phoneBlog"></div>
+          </div>
+
+          <div class="activity" id="act-droidkit" role="dialog" aria-label="DroidKit">
+            <div class="appbar"><button class="iconbtn ripple" data-back aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5m6-7-7 7 7 7"/></svg></button><h3>DroidKit</h3></div>
+            <div class="act-body">
+              <div class="pgroup-label">Deep links</div>
+              <div class="pgroup">
+                <div class="pref"><span class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span><span class="grow"><span class="pt">swiggy://menu?id=…</span><span class="ps" style="display:block">Pick a target app · starred history</span></span></div>
+                <div class="pref"><span class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="7"/></svg></span><span class="grow"><span class="pt">Floating bubble</span><span class="ps" style="display:block">Re-run the last link over any app</span></span></div>
+              </div>
+              <div class="pgroup-label">Try it on this page</div>
+              <div class="pgroup" id="phoneDevToggles"></div>
+            </div>
+          </div>
+
+          <div class="activity" id="act-logcat" role="dialog" aria-label="Logcat">
+            <div class="appbar"><button class="iconbtn ripple" data-back aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5m6-7-7 7 7 7"/></svg></button><h3>Logcat</h3></div>
+            <div class="mini-log" id="miniLog"></div>
+          </div>
+
+          <div class="activity" id="act-settings" role="dialog" aria-label="Settings">
+            <div class="appbar"><button class="iconbtn ripple" data-back aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5m6-7-7 7 7 7"/></svg></button></div>
+            <div class="act-body">
+              <div class="big-title">Settings</div>
+              <div class="pgroup">
+                <button class="pref ripple" id="prefTheme" role="switch" aria-checked="false"><span class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z"/></svg></span><span class="grow"><span class="pt">Dark theme</span><span class="ps" style="display:block">Applies to this page</span></span><span class="sw" aria-hidden="true"></span></button>
+                <a class="pref ripple" href="https://anik.sh/blog/preserving-battery-health/" target="_blank" rel="noopener"><span class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2h6v2h2a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h2z"/></svg></span><span class="grow"><span class="pt">Battery</span><span class="ps" style="display:block">80% · Charging optimised. Why it matters</span></span></a>
+              </div>
+              <div class="pgroup">
+                <button class="pref ripple" id="prefDev" data-open="dev" aria-disabled="true"><span class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8.6 16.6 4 12l4.6-4.6L7.2 6 1.2 12l6 6zm6.8 0L20 12l-4.6-4.6L16.8 6l6 6-6 6z"/></svg></span><span class="grow"><span class="pt">Developer options</span><span class="ps" style="display:block" id="prefDevSub">Locked</span></span></button>
+                <button class="pref ripple" data-open="aboutphone"><span class="pi"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 1h10a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 4v14h10V5z"/></svg></span><span class="grow"><span class="pt">About phone</span><span class="ps" style="display:block">anik · Kotlin-first</span></span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="activity" id="act-aboutphone" role="dialog" aria-label="About phone">
+            <div class="appbar"><button class="iconbtn ripple" data-back aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5m6-7-7 7 7 7"/></svg></button></div>
+            <div class="act-body">
+              <div class="big-title">About phone</div>
+              <div class="pgroup">
+                <div class="pref"><span class="grow"><span class="pt">Device name</span><span class="ps" style="display:block">anik</span></span></div>
+                <div class="pref"><span class="grow"><span class="pt">Model</span><span class="ps" style="display:block">Android Engineer (Swiggy)</span></span></div>
+                <div class="pref"><span class="grow"><span class="pt">Android version</span><span class="ps" style="display:block">Kotlin · Gradle · adb</span></span></div>
+              </div>
+              <div class="pgroup">
+                <button class="pref ripple" id="buildNumber"><span class="grow"><span class="pt">Build number</span><span class="ps" style="display:block">SH.ANIK.260923.001</span></span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="activity" id="act-dev" role="dialog" aria-label="Developer options">
+            <div class="appbar"><button class="iconbtn ripple" data-back aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5m6-7-7 7 7 7"/></svg></button></div>
+            <div class="act-body">
+              <div class="big-title">Developer options</div>
+              <div class="pgroup-label">Drawing</div>
+              <div class="pgroup" id="devDrawing"></div>
+              <div class="pgroup-label">Input · Rendering</div>
+              <div class="pgroup" id="devInput"></div>
+            </div>
+          </div>
+
+          <div class="toast" id="phoneToast" role="status" aria-live="polite"></div>
+          <button class="navhit" data-back aria-label="Go home"></button>
+          <span class="navpill" aria-hidden="true"></span>
+        </div>
+      </div>
+      </div>
+      <p class="phone-hint">It works. Open <b>Settings → About phone</b> and tap <b>Build number</b> seven times.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="writing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">RecyclerView&lt;Post&gt;</p>
+        <h2>Writing</h2>
+        <p>Build speed, test coverage, and the hardware we test on. Written up at work on Swiggy Bytes and on my own blog.</p>
+      </div>
+      <a class="aside" href="https://anik.sh/blog/" style="text-decoration:none">All posts →</a>
+    </div>
+    <div class="posts" id="posts"></div>
+  </div>
+</section>
+
+<section class="block" id="toolchain">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">./gradlew :anik:dependencies</p>
+        <h2>Toolchain</h2>
+        <p>The things I reach for, and what I think each one is for.</p>
+      </div>
+    </div>
+    <div class="split">
+      <div class="principles">
+        <div class="principle"><h4>Only run what changed <span class="mono">:test --affected</span></h4><p>A PR that touches one module shouldn't pay for the whole suite. Work out the affected modules from the Gradle graph and run just those tests. That's faster feedback and a smaller CI bill.</p></div>
+        <div class="principle"><h4>Make regressions loud <span class="mono">verifyEvents</span></h4><p>Analytics events break quietly. Check them automatically in tests so a missing or wrong event fails a build, not a dashboard three weeks later.</p></div>
+        <div class="principle"><h4>Measure on real hardware <span class="mono">macrobenchmark</span></h4><p>Emulators don't tell you about jank. Use real devices, keep them plugged in, and look after their batteries so they last.</p></div>
+      </div>
+      <div class="code">
+        <div class="code-tabs" role="tablist">
+          <button class="code-tab" role="tab" aria-selected="true" data-tab="gradle" id="tab-gradle">build.gradle.kts</button>
+          <button class="code-tab" role="tab" aria-selected="false" data-tab="kt" id="tab-kt">AffectedTests.kt</button>
+          <span class="sp">Kotlin DSL</span>
+        </div>
+<pre id="code-gradle"><span class="ln"><span class="c-f">plugins</span> {</span><span class="ln">    <span class="c-f">id</span>(<span class="c-s">"com.android.application"</span>)</span><span class="ln">    <span class="c-k">kotlin</span>(<span class="c-s">"android"</span>)</span><span class="ln">}</span><span class="ln"></span><span class="ln"><span class="c-f">android</span> {</span><span class="ln">    namespace = <span class="c-s">"sh.anik"</span></span><span class="ln">    defaultConfig { minSdk = <span class="c-n">24</span>; targetSdk = <span class="c-n">36</span> }</span><span class="ln">}</span><span class="ln"></span><span class="ln"><span class="c-f">dependencies</span> {</span><span class="ln hl">    <span class="c-c">// the language: everything, including the build</span></span><span class="ln">    <span class="c-f">implementation</span>(<span class="c-s">"org.jetbrains.kotlinx:kotlinx-coroutines-android"</span>)</span><span class="ln">    <span class="c-f">implementation</span>(<span class="c-s">"androidx.compose.material3:material3"</span>)</span><span class="ln"></span><span class="ln hl">    <span class="c-c">// the safety net: fast, deterministic, run on every PR</span></span><span class="ln">    <span class="c-f">testImplementation</span>(<span class="c-s">"junit:junit"</span>)</span><span class="ln">    <span class="c-f">androidTestImplementation</span>(<span class="c-s">"androidx.test.espresso:espresso-core"</span>)</span><span class="ln"></span><span class="ln hl">    <span class="c-c">// the truth: numbers from real devices, not emulators</span></span><span class="ln">    <span class="c-f">androidTestImplementation</span>(<span class="c-s">"androidx.benchmark:benchmark-macro-junit4"</span>)</span><span class="ln">}</span></pre>
+<pre id="code-kt" hidden><span class="ln"><span class="c-c">// Illustrative: map changed files → owning modules → dependents</span></span><span class="ln"><span class="c-k">fun</span> <span class="c-f">affectedModules</span>(changed: List&lt;File&gt;, graph: ModuleGraph): Set&lt;Project&gt; {</span><span class="ln">    <span class="c-k">val</span> touched = changed.<span class="c-f">mapNotNull</span> { graph.<span class="c-f">ownerOf</span>(it) }.<span class="c-f">toSet</span>()</span><span class="ln">    <span class="c-k">return</span> touched + touched.<span class="c-f">flatMap</span> { graph.<span class="c-f">dependentsOf</span>(it) }</span><span class="ln">}</span><span class="ln"></span><span class="ln">tasks.<span class="c-f">register</span>(<span class="c-s">"testAffected"</span>) {</span><span class="ln">    <span class="c-f">dependsOn</span>(</span><span class="ln hl">        <span class="c-f">affectedModules</span>(git.<span class="c-f">diff</span>(<span class="c-s">"origin/main"</span>), moduleGraph)</span><span class="ln">            .<span class="c-f">map</span> { <span class="c-s">"${it.path}:testDebugUnitTest"</span> }</span><span class="ln">    )</span><span class="ln">}</span><span class="ln"></span><span class="ln"><span class="c-c">// ./gradlew testAffected → minutes, not the whole suite</span></span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="droidkit">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">com.anikrajc.droidkit</p>
+        <h2>DroidKit</h2>
+        <p>An Android toolkit for the fiddly parts of testing an app: firing deep links, flipping developer settings, checking the network. Everything stays on the device.</p>
+      </div>
+      <span class="aside">No analytics · no account · no ads</span>
+    </div>
+    <div class="split">
+      <div>
+        <p style="margin:0 0 14px;color:var(--ink-2)">DroidKit's developer toggles save you digging through Settings. These tiles do the same for <em>this page</em>. Try one.</p>
+        <div class="qs" id="pageTiles"></div>
+      </div>
+      <div>
+        <div class="features" style="margin-top:0">
+          <div class="feature"><h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Deep link runner</h4><p>Fire any URI at the app you choose, see which installed apps can handle it, and keep a starred history of the ones you use.</p></div>
+          <div class="feature"><h4><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="7"/></svg>Floating bubble</h4><p>An optional launcher that sits over other apps, so you can re-run a deep link without leaving the screen you're testing. Off by default.</p></div>
+          <div class="feature"><h4><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8.6 16.6 4 12l4.6-4.6L7.2 6 1.2 12l6 6zm6.8 0L20 12l-4.6-4.6L16.8 6l6 6-6 6z"/></svg>Developer toggles</h4><p>Layout bounds and animation scales in one tap. Needs <code>WRITE_SECURE_SETTINGS</code>, which you grant once over adb.</p></div>
+          <div class="feature"><h4><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.5 23.6 7A17.5 17.5 0 0 0 .4 7z"/></svg>Network inspector</h4><p>Read-only network and Wi-Fi status, for when a bug depends on the connection.</p></div>
+        </div>
+        <div class="dk-meta">
+          <span>Pre-release · Firebase App Distribution</span>
+          <a href="https://anik.sh/droidkit-privacy.html" target="_blank" rel="noopener">Privacy policy →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="logcat">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">adb logcat -v time sh.anik:V</p>
+        <h2>Logcat</h2>
+        <p>This page logs what it's actually doing: its real load time, dropped frames, the phone apps you open, and every developer option you change. Tagged the way Android would tag them.</p>
+      </div>
+      <span class="aside tnum" id="lcPid">pid —</span>
+    </div>
+    <div class="logcat">
+      <div class="lc-bar">
+        <div class="lc-levels" role="group" aria-label="Log levels">
+          <button class="lv" data-l="V" aria-pressed="true" title="Verbose">V</button>
+          <button class="lv" data-l="D" aria-pressed="true" title="Debug">D</button>
+          <button class="lv" data-l="I" aria-pressed="true" title="Info">I</button>
+          <button class="lv" data-l="W" aria-pressed="true" title="Warn">W</button>
+          <button class="lv" data-l="E" aria-pressed="true" title="Error">E</button>
+        </div>
+        <label for="lcFilter" class="mono" style="font-size:12px;color:var(--muted)">tag:</label>
+        <input class="lc-filter" id="lcFilter" placeholder="Choreographer, ActivityTaskManager…" autocomplete="off" spellcheck="false">
+        <button class="lc-btn" id="lcPause" aria-pressed="false">Pause</button>
+        <button class="lc-btn" id="lcClear">Clear</button>
+      </div>
+      <div class="lc-out" id="lcOut" role="log" aria-live="off" tabindex="0"></div>
+      <div class="lc-foot"><span id="lcCount">0 lines</span><span id="lcFps">— fps</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Intent.ACTION_VIEW</p>
+        <h2>Say hello</h2>
+        <p>Happy to talk about Gradle, test infrastructure, or keeping a rack of Pixels alive. Open a link, or copy the adb command if you have a device plugged in.</p>
+      </div>
+    </div>
+    <div class="intents" id="intents"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Anik Raj C</span>
+    <span>versionName 2026.09 · <button class="buildno" id="footBuild">Build number SH.ANIK.260923.001</button></span>
+    <span class="right"><a href="https://anik.sh/">anik.sh</a><a href="https://anik.sh/blog/">Blog</a><a href="https://github.com/anikrajc" rel="me">GitHub</a></span>
+  </div>
+</footer>
+
+<div class="snack" id="snack" role="status" aria-live="polite"></div>
+<button class="dev-fab" id="devFab" hidden aria-expanded="false" aria-controls="devSheet">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.6 16.6 4 12l4.6-4.6L7.2 6 1.2 12l6 6zm6.8 0L20 12l-4.6-4.6L16.8 6l6 6-6 6z"/></svg>Developer options</button>
+<div class="dev-sheet" id="devSheet" hidden><h5>Developer options <span>adb shell settings</span></h5><div class="qs" id="sheetTiles"></div></div>
+<canvas class="ptr-canvas" id="ptrCanvas" hidden></canvas>
+<div class="ptr-bar" id="ptrBar" hidden></div>
+<canvas class="gpu" id="gpu" hidden></canvas>
+
+<script>
+(() => {
+  const T0 = performance.now();
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const root = document.documentElement;
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch {} }
+  };
+  const scale = () => parseFloat(getComputedStyle(root).getPropertyValue('--anim')) || 1;
+
+  /* ── Data ── */
+  const POSTS = [
+    { date: '2025-01-19', label: 'Jan 2025', title: 'Preserving Battery Health on Connected Devices', pub: 'anik.sh',
+      url: 'https://anik.sh/blog/preserving-battery-health/', tags: ['android', 'device farm', 'testing'],
+      text: 'A Pixel 4a started to bulge after months on the charger running benchmarks. What I changed: a root-based 40/70 charge window, and the Pixel’s built-in 80% limit on newer devices.' },
+    { date: '2024-04-02', label: 'Apr 2024', title: 'Automating Mobile Analytics Event Verification', pub: 'Swiggy Bytes',
+      url: 'https://bytes.swiggy.com/automating-mobile-event-verification-1d840f39d300', tags: ['android', 'testing', 'kotlin', 'analytics'],
+      text: 'Improving event coverage through automation: verifying analytics events in tests so a regression fails the build before it ships.' },
+    { date: '2022-09-13', label: 'Sep 2022', title: 'Run Incremental Tests to Accelerate PR Checks and Minimize Costs', pub: 'Swiggy Bytes',
+      url: 'https://bytes.swiggy.com/gradle-incremental-test-runner-125cee1e68a7', tags: ['gradle', 'android', 'testing', 'ci/cd'],
+      text: 'Improve developer productivity and save money by running only the tests your PR affects, not the entire suite.' }
+  ];
+  const INTENTS = [
+    { who: 'GitHub', url: 'https://github.com/anikrajc' },
+    { who: 'X', url: 'https://x.com/anikrajc' },
+    { who: 'LinkedIn', url: 'https://in.linkedin.com/in/anikrajc' },
+    { who: 'Blog', url: 'https://anik.sh/blog/' }
+  ];
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  $('#posts').innerHTML = POSTS.map(p => `
+    <a class="post ripple" href="${p.url}" target="_blank" rel="noopener">
+      <time datetime="${p.date}">${p.date}</time>
+      <div><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p>
+        <div class="tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div>
+      <span class="pub">${esc(p.pub)} <span class="arrow" aria-hidden="true">↗</span></span>
+    </a>`).join('');
+  $('#phoneBlog').innerHTML = `<div class="pgroup">${POSTS.map(p => `
+    <a class="pref ripple" href="${p.url}" target="_blank" rel="noopener"><span class="grow">
+      <span class="pt" style="display:block">${esc(p.title)}</span>
+      <span class="ps" style="display:block">${p.label} · ${esc(p.pub)}</span></span></a>`).join('')}</div>`;
+  $('#intents').innerHTML = INTENTS.map(i => `
+    <div class="intent"><span class="who">${i.who}</span>
+      <code>adb shell am start -a android.intent.action.VIEW -d <span class="u">${i.url}</span></code>
+      <button type="button" data-copy="adb shell am start -a android.intent.action.VIEW -d ${i.url}">Copy</button>
+      <a href="${i.url}" target="_blank" rel="noopener me">Open</a></div>`).join('');
+
+  /* ── Snackbar ── */
+  let snackT;
+  const snack = msg => { const s = $('#snack'); s.textContent = msg; s.classList.add('on'); clearTimeout(snackT); snackT = setTimeout(() => s.classList.remove('on'), 2400); };
+  let toastT;
+  const toast = msg => { const t = $('#phoneToast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 1800); };
+
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-copy]');
+    if (!b) return;
+    const text = b.dataset.copy;
+    const fallback = () => { const code = b.parentElement.querySelector('code'); const r = document.createRange(); r.selectNodeContents(code); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); snack('Selected. Press Ctrl/⌘ + C to copy'); };
+    try { navigator.clipboard.writeText(text).then(() => { snack('Copied adb command'); log('I', 'ClipboardService', 'setPrimaryClip: text/plain (' + text.length + ' chars)'); }, fallback); } catch { fallback(); }
+  });
+
+  /* ── Ripple ── */
+  document.addEventListener('pointerdown', e => {
+    const el = e.target.closest('.ripple');
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const d = Math.max(r.width, r.height) * 2.2;
+    const z = parseFloat(getComputedStyle(el).zoom) || 1;
+    const s = document.createElement('span');
+    s.className = 'rip';
+    const zoomAll = el.closest('.phone') ? (parseFloat($('#phone').style.zoom) || 1) : 1;
+    const k = 1 / (zoomAll * z);
+    s.style.width = s.style.height = d * k + 'px';
+    s.style.left = ((e.clientX - r.left) - d / 2) * k + 'px';
+    s.style.top = ((e.clientY - r.top) - d / 2) * k + 'px';
+    el.appendChild(s);
+    setTimeout(() => s.remove(), 600 * Math.max(scale(), .2) + 50);
+  });
+
+  /* ── Logcat bus ── */
+  const PID = 4000 + Math.floor(Math.random() * 5000);
+  $('#lcPid').textContent = `pid ${PID} · sh.anik`;
+  const lines = [];
+  const levels = new Set(['V', 'D', 'I', 'W', 'E']);
+  let filter = '', paused = false, count = 0;
+  const out = $('#lcOut'), mini = $('#miniLog');
+  const pad = (n, w = 2) => String(n).padStart(w, '0');
+  const stamp = () => { const d = new Date(); return `${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}.${pad(d.getMilliseconds(), 3)}`; };
+  const visible = l => levels.has(l.lvl) && (!filter || l.tag.toLowerCase().includes(filter) || l.msg.toLowerCase().includes(filter));
+  const row = (l, fresh) => {
+    const d = document.createElement('div');
+    d.className = `lc-line ${l.lvl}${fresh ? ' new' : ''}`;
+    d.innerHTML = `<span class="ts">${l.ts.slice(6)}</span><span class="pid">${PID}-${l.tid}</span><span class="lvl">${l.lvl}</span><span class="tag">${esc(l.tag)}</span><span class="msg">${esc(l.msg)}</span>`;
+    return d;
+  };
+  const stick = el => el.scrollHeight - el.scrollTop - el.clientHeight < 40;
+  function log(lvl, tag, msg, tid) {
+    const l = { ts: stamp(), lvl, tag, msg, tid: tid || PID };
+    lines.push(l); if (lines.length > 400) lines.shift();
+    count++;
+    $('#lcCount').textContent = `${count} line${count === 1 ? '' : 's'}`;
+    if (!paused && visible(l)) {
+      const s = stick(out);
+      out.appendChild(row(l, true));
+      while (out.children.length > 400) out.firstChild.remove();
+      if (s) out.scrollTop = out.scrollHeight;
+    }
+    const m = document.createElement('div');
+    m.className = lvl; m.textContent = `${lvl}/${tag}: ${msg}`;
+    const ms = stick(mini);
+    mini.appendChild(m); while (mini.children.length > 120) mini.firstChild.remove();
+    if (ms) mini.scrollTop = mini.scrollHeight;
+  }
+  const rerender = () => { out.replaceChildren(...lines.filter(visible).map(l => row(l, false))); out.scrollTop = out.scrollHeight; };
+  $$('.lv').forEach(b => b.addEventListener('click', () => {
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', on); on ? levels.add(b.dataset.l) : levels.delete(b.dataset.l); rerender();
+  }));
+  $('#lcFilter').addEventListener('input', e => { filter = e.target.value.trim().toLowerCase(); rerender(); });
+  $('#lcPause').addEventListener('click', e => { paused = !paused; e.target.textContent = paused ? 'Resume' : 'Pause'; e.target.setAttribute('aria-pressed', paused); if (!paused) rerender(); });
+  $('#lcClear').addEventListener('click', () => { lines.length = 0; out.replaceChildren(); log('V', 'logcat', '--------- beginning of main'); });
+
+  log('V', 'logcat', '--------- beginning of main');
+  log('I', 'Zygote', `Process: sh.anik, PID: ${PID}`);
+  log('D', 'ActivityThread', 'handleBindApplication: sh.anik (debuggable=true)');
+  const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  addEventListener('load', () => {
+    const ms = Math.round(nav && nav.domContentLoadedEventEnd ? nav.domContentLoadedEventEnd : performance.now());
+    log('I', 'ActivityTaskManager', `Displayed sh.anik/.PortfolioActivity: +${ms}ms`);
+    if (document.fonts) document.fonts.ready.then(() => log('D', 'Typeface', `Loaded ${[...document.fonts].filter(f => f.status === 'loaded').length} font faces (Figtree, Geist Mono)`));
+    log('I', 'DisplayManager', `Display 0: ${innerWidth}x${innerHeight} dp, density ${devicePixelRatio.toFixed(2)}x`);
+  });
+  const ua = navigator.userAgent;
+  const m = ua.match(/Android (\d+)/);
+  log('D', 'Build', m ? `Visitor on Android ${m[1]}. Hello, fellow droid.` : 'Visitor is not on Android. That’s fine, the page emulates one.');
+
+  const AMBIENT = [
+    () => ['D', 'BatteryService', `level=80 plugged=usb status=not_charging charge_limit=80 temp=${(29 + Math.random() * 3).toFixed(1)}°C`],
+    () => ['I', 'art', `Background concurrent mark compact GC freed ${(1 + Math.random() * 3).toFixed(1)}MB AllocSpace objects, paused ${(Math.random() * 400 + 90) | 0}us`],
+    () => ['V', 'sh.anik', 'Hint: Settings → About phone → Build number × 7'],
+    () => ['D', 'NetworkMonitor', 'validated · WIFI · NOT_METERED'],
+    () => ['I', 'GradleDaemon', 'Configuration cache entry reused. testAffected scheduled 0 tasks: nothing changed'],
+    () => ['D', 'Choreographer', `frame budget 16.67ms · ${fpsNow ? fpsNow + ' fps' : 'steady'}`],
+    () => ['W', 'StrictMode', 'policy=CAFFEINE violation: 3rd cup before 11:00'],
+  ];
+  let ai = 0;
+  setInterval(() => { if (document.hidden) return; const [l, t, mm] = AMBIENT[ai++ % AMBIENT.length](); log(l, t, mm, PID + 7); }, 4200);
+
+  /* Real frame monitor: fps + dropped frame warnings + GPU bars feed */
+  let last = performance.now(), frames = 0, fpsNow = 0, fpsT = last;
+  const hist = [];
+  function frame(t) {
+    const dt = t - last; last = t;
+    if (!document.hidden && dt < 1000) {
+      hist.push(dt); if (hist.length > 160) hist.shift();
+      if (dt > 100 && t - T0 > 1500) log('W', 'Choreographer', `Skipped ${Math.round(dt / 16.67) - 1} frames! The application may be doing too much work on its main thread.`);
+    }
+    frames++;
+    if (t - fpsT > 1000) { fpsNow = Math.round(frames * 1000 / (t - fpsT)); frames = 0; fpsT = t; $('#lcFps').textContent = `${fpsNow} fps · ${(1000 / Math.max(fpsNow, 1)).toFixed(1)} ms/frame`; }
+    if (dev.gpu) drawGpu();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  /* Section visits → activity lifecycle */
+  const seen = new Set();
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const id = e.target.id; const name = id[0].toUpperCase() + id.slice(1);
+      log('D', 'FragmentManager', `${seen.has(id) ? 'onResume' : 'onCreateView'}: ${name}Fragment`);
+      seen.add(id);
+    }), { threshold: .35 });
+    $$('section.block').forEach(s => io.observe(s));
+  }
+
+  /* ── Clocks ── */
+  function tick() {
+    const d = new Date();
+    const hh = pad(d.getHours()), mm = pad(d.getMinutes());
+    $('#sbClock').textContent = `${hh}:${mm}`;
+    $('#topClock').textContent = `${hh}:${mm}`;
+    $('#clkH').textContent = hh; $('#clkM').textContent = mm;
+    $('#glanceDate').textContent = d.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+  tick(); setInterval(tick, 5000);
+
+  /* ── Phone: fit + navigation ── */
+  const phone = $('#phone'), fit = $('#phoneFit'), screen = $('#screen');
+  function fitPhone() {
+    const w = fit.clientWidth; const z = Math.min(1, w / 340);
+    phone.style.zoom = z < 1 ? z.toFixed(3) : '';
+  }
+  fitPhone(); addEventListener('resize', fitPhone);
+
+  const stack = [];
+  const ACT = { about: 'AboutActivity', blog: 'WritingActivity', droidkit: 'DroidKitActivity', logcat: 'LogcatActivity', settings: 'SettingsActivity', aboutphone: 'DeviceInfoActivity', dev: 'DevelopmentSettingsActivity' };
+  function open(name, from) {
+    const a = $('#act-' + name); if (!a) return;
+    if (name === 'dev' && !dev.unlocked) { toast('Developer options are locked'); return; }
+    if (from) {
+      const sr = screen.getBoundingClientRect(), fr = from.getBoundingClientRect();
+      const z = parseFloat(phone.style.zoom) || 1;
+      a.style.transformOrigin = `${(fr.left + fr.width / 2 - sr.left) / z}px ${(fr.top + fr.height / 2 - sr.top) / z}px`;
+    }
+    a.style.zIndex = 4 + stack.length;
+    stack.push(a); a.classList.add('on'); screen.classList.add('app-open');
+    log('I', 'ActivityTaskManager', `START u0 {act=android.intent.action.MAIN cmp=sh.anik/.${ACT[name]}}`);
+    if (name === 'logcat') mini.scrollTop = mini.scrollHeight;
+    const f = a.querySelector('[data-back]'); if (f) f.focus({ preventScroll: true });
+  }
+  function back() {
+    const a = stack.pop(); if (!a) return;
+    a.classList.remove('on');
+    if (!stack.length) screen.classList.remove('app-open');
+    log('D', 'ActivityTaskManager', `finishActivity: ${a.getAttribute('aria-label')} → ${stack.length ? stack[stack.length - 1].getAttribute('aria-label') : 'Launcher'}`);
+  }
+  screen.addEventListener('click', e => {
+    const o = e.target.closest('[data-open]');
+    if (o) { if (o.getAttribute('aria-disabled') === 'true') { toast('Tap Build number 7 times to unlock'); return; } open(o.dataset.open, o); return; }
+    if (e.target.closest('[data-back]')) { if (e.target.closest('.navhit')) { while (stack.length) back(); } else back(); }
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && stack.length && screen.contains(document.activeElement)) back(); });
+
+  /* ── Theme ── */
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  const syncTheme = () => $('#prefTheme').setAttribute('aria-checked', isDark());
+  syncTheme();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', syncTheme);
+  $('#prefTheme').addEventListener('click', () => {
+    root.dataset.theme = isDark() ? 'light' : 'dark'; syncTheme();
+    log('I', 'UiModeManager', `setNightMode: ${root.dataset.theme === 'dark' ? 'MODE_NIGHT_YES' : 'MODE_NIGHT_NO'}`);
+  });
+
+  /* ── Developer options ── */
+  const dev = { unlocked: store.get('sh.anik.dev') === '1', bounds: false, pointer: false, gpu: false, anim: 1 };
+  const ANIMS = [1, 2, 5, 10, 0.5, 0];
+  const OPTS = {
+    bounds: { t: 'Show layout bounds', s: 'Show clip bounds, margins, etc.', prop: 'debug.layout', icon: '<path d="M3 3h7v2H5v5H3zm11 0h7v7h-2V5h-5zM3 14h2v5h5v2H3zm16 0h2v7h-7v-2h5z"/>' },
+    pointer: { t: 'Pointer location', s: 'Overlay showing current touch data', prop: 'pointer_location', icon: '<path d="M11 2h2v6h-2zm0 14h2v6h-2zM2 11h6v2H2zm14 0h6v2h-6zm-4-2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>' },
+    gpu: { t: 'Profile HWUI rendering', s: 'On screen as bars', prop: 'debug.hwui.profile', icon: '<path d="M3 20h18v1.5H3zM5 11h3v8H5zm5-6h3v14h-3zm5 9h3v5h-3z"/>' },
+    anim: { t: 'Animator duration scale', s: '', prop: 'animator_duration_scale', icon: '<path d="M12 4a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6zm-1 3h2v5.4l3.5 2-1 1.7-4.5-2.6z"/>' }
+  };
+  const animLabel = v => v === 0 ? 'Animation off' : `Animation scale ${v}x`;
+  function tileHTML(k) {
+    const o = OPTS[k];
+    return `<button class="tile ripple" data-dev="${k}" aria-pressed="false"><span class="ti"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">${o.icon}</svg></span><span><span class="tt" style="display:block">${o.t}</span><span class="ts" data-sub="${k}"></span></span></button>`;
+  }
+  function prefHTML(k) {
+    const o = OPTS[k];
+    return k === 'anim'
+      ? `<button class="pref ripple" data-dev="anim"><span class="grow"><span class="pt" style="display:block">${o.t}</span><span class="ps" data-sub="anim"></span></span></button>`
+      : `<button class="pref ripple" data-dev="${k}" role="switch" aria-checked="false"><span class="grow"><span class="pt" style="display:block">${o.t}</span><span class="ps" style="display:block">${o.s}</span></span><span class="sw" aria-hidden="true"></span></button>`;
+  }
+  $('#pageTiles').innerHTML = ['bounds', 'pointer', 'gpu', 'anim'].map(tileHTML).join('');
+  $('#sheetTiles').innerHTML = ['bounds', 'pointer', 'gpu', 'anim'].map(tileHTML).join('');
+  $('#devDrawing').innerHTML = prefHTML('bounds') + prefHTML('anim');
+  $('#devInput').innerHTML = prefHTML('pointer') + prefHTML('gpu');
+  $('#phoneDevToggles').innerHTML = prefHTML('bounds') + prefHTML('anim');
+
+  function syncDev() {
+    root.classList.toggle('bounds', dev.bounds);
+    root.style.setProperty('--anim', dev.anim === 0 ? '0.001' : dev.anim);
+    $$('[data-dev]').forEach(el => {
+      const k = el.dataset.dev;
+      const on = k === 'anim' ? dev.anim !== 1 : dev[k];
+      if (el.classList.contains('tile')) el.setAttribute('aria-pressed', on);
+      else if (k !== 'anim') el.setAttribute('aria-checked', on);
+    });
+    $$('[data-sub]').forEach(el => {
+      const k = el.dataset.sub;
+      el.style.display = 'block';
+      el.textContent = k === 'anim' ? animLabel(dev.anim) : (dev[k] ? 'On' : 'Off');
+    });
+    $('#ptrCanvas').hidden = $('#ptrBar').hidden = !dev.pointer;
+    $('#gpu').hidden = !dev.gpu;
+    const p = $('#prefDev');
+    p.setAttribute('aria-disabled', !dev.unlocked);
+    $('#prefDevSub').textContent = dev.unlocked ? 'On' : 'Locked';
+    $('#devFab').hidden = !dev.unlocked;
+    if (dev.pointer) sizePtr();
+    if (dev.gpu) sizeGpu();
+  }
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-dev]'); if (!el) return;
+    const k = el.dataset.dev;
+    if (k === 'anim') {
+      dev.anim = ANIMS[(ANIMS.indexOf(dev.anim) + 1) % ANIMS.length];
+      log('I', 'SettingsProvider', `put global animator_duration_scale=${dev.anim.toFixed(1)}`);
+      log('D', 'ValueAnimator', `sDurationScale=${dev.anim}`);
+    } else {
+      dev[k] = !dev[k];
+      const o = OPTS[k];
+      if (k === 'bounds') log('I', 'SystemProperties', `set ${o.prop}=${dev[k]}`);
+      else if (k === 'gpu') log('I', 'SystemProperties', `set ${o.prop}=${dev[k] ? 'visual_bars' : 'false'}`);
+      else log('I', 'SettingsProvider', `put system ${o.prop}=${dev[k] ? 1 : 0}`);
+      log('D', 'ViewRootImpl', 'invalidate() · requestLayout() on all windows');
+    }
+    syncDev();
+  });
+
+  /* Build number × 7 */
+  let taps = 0, tapT;
+  function buildTap(inPhone) {
+    const say = inPhone ? toast : snack;
+    if (dev.unlocked) { say('No need, you are already a developer.'); return; }
+    clearTimeout(tapT); tapT = setTimeout(() => taps = 0, 3000);
+    taps++;
+    const left = 7 - taps;
+    if (left <= 0) {
+      dev.unlocked = true; store.set('sh.anik.dev', '1'); syncDev();
+      say('You are now a developer!');
+      log('I', 'DevelopmentSettings', 'development_settings_enabled=1');
+      if (!inPhone) snack('You are now a developer! Use the Developer options button, bottom right.');
+    } else if (taps >= 3) {
+      say(`You are now ${left} step${left === 1 ? '' : 's'} away from being a developer.`);
+    }
+  }
+  $('#buildNumber').addEventListener('click', () => buildTap(true));
+  $('#footBuild').addEventListener('click', () => buildTap(false));
+  $('#devFab').addEventListener('click', () => {
+    const s = $('#devSheet'); s.hidden = !s.hidden; $('#devFab').setAttribute('aria-expanded', !s.hidden);
+  });
+
+  /* Pointer location overlay */
+  const pc = $('#ptrCanvas'), pctx = pc.getContext('2d'), bar = $('#ptrBar');
+  const trail = [];
+  let lp = null;
+  function sizePtr() { const r = devicePixelRatio || 1; pc.width = innerWidth * r; pc.height = innerHeight * r; pctx.setTransform(r, 0, 0, r, 0, 0); }
+  function drawPtr(p) {
+    pctx.clearRect(0, 0, innerWidth, innerHeight);
+    pctx.lineWidth = 1; pctx.strokeStyle = 'rgba(0,112,255,.9)';
+    pctx.beginPath(); pctx.moveTo(0, p.y); pctx.lineTo(innerWidth, p.y); pctx.moveTo(p.x, 0); pctx.lineTo(p.x, innerHeight); pctx.stroke();
+    pctx.strokeStyle = 'rgba(255,32,32,.9)'; pctx.lineWidth = 2; pctx.beginPath();
+    trail.forEach((q, i) => i ? pctx.lineTo(q.x, q.y) : pctx.moveTo(q.x, q.y)); pctx.stroke();
+    pctx.fillStyle = 'rgba(255,32,32,.9)'; trail.forEach(q => pctx.fillRect(q.x - 1.5, q.y - 1.5, 3, 3));
+  }
+  addEventListener('pointermove', e => {
+    if (!dev.pointer) return;
+    const now = performance.now(), p = { x: e.clientX, y: e.clientY, t: now };
+    trail.push(p); while (trail.length > 48) trail.shift();
+    const dx = lp ? p.x - lp.x : 0, dy = lp ? p.y - lp.y : 0, dt = lp ? Math.max(now - lp.t, 1) : 1;
+    bar.innerHTML = [`P: ${e.buttons ? 1 : 0} / 1`, `X: ${p.x.toFixed(1)}`, `Y: ${p.y.toFixed(1)}`, `dX: ${dx.toFixed(1)}`, `dY: ${dy.toFixed(1)}`, `Xv: ${(dx / dt).toFixed(3)}`, `Prs: ${(e.pressure || 0).toFixed(2)}`]
+      .map(s => `<span>${s}</span>`).join('');
+    lp = p; drawPtr(p);
+  }, { passive: true });
+  addEventListener('resize', () => { if (dev.pointer) sizePtr(); if (dev.gpu) sizeGpu(); });
+
+  /* Profile HWUI rendering bars */
+  const g = $('#gpu'), gctx = g.getContext('2d');
+  function sizeGpu() { const r = devicePixelRatio || 1; g.width = innerWidth * r; g.height = 120 * r; gctx.setTransform(r, 0, 0, r, 0, 0); }
+  function drawGpu() {
+    const W = innerWidth, H = 120, px = 3.2; // px per ms
+    gctx.clearRect(0, 0, W, H);
+    const bw = Math.max(3, Math.min(8, (W - 16) / 160 - 1));
+    const n = Math.min(hist.length, Math.floor((W - 16) / (bw + 1)));
+    const data = hist.slice(-n);
+    data.forEach((dt, i) => {
+      const h = Math.min(dt * px, H - 4);
+      const x = 8 + i * (bw + 1);
+      const split = Math.min(h, 16.67 * px * .55);
+      gctx.fillStyle = dt > 16.9 ? 'rgba(244,67,54,.85)' : 'rgba(33,150,243,.85)';
+      gctx.fillRect(x, H - h, bw, h - split);
+      gctx.fillStyle = 'rgba(76,175,80,.85)';
+      gctx.fillRect(x, H - split, bw, split);
+    });
+    gctx.fillStyle = 'rgba(76,175,80,1)';
+    gctx.fillRect(0, H - 16.67 * px, W, 2);
+  }
+
+  syncDev();
+  if (dev.unlocked) log('D', 'DevelopmentSettings', 'development_settings_enabled=1 (restored)');
+
+  /* Code tabs */
+  $$('.code-tab').forEach(t => t.addEventListener('click', () => {
+    $$('.code-tab').forEach(x => x.setAttribute('aria-selected', x === t));
+    $('#code-gradle').hidden = t.dataset.tab !== 'gradle';
+    $('#code-kt').hidden = t.dataset.tab !== 'kt';
+    log('D', 'Editor', `open ${t.textContent}`);
+  }));
+
+  document.addEventListener('visibilitychange', () => log('D', 'ActivityThread', document.hidden ? 'onPause: PortfolioActivity' : 'onResume: PortfolioActivity'));
+})();
+</script>
+
+</html>
